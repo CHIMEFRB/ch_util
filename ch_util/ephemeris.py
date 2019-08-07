@@ -248,6 +248,7 @@ def utc_lst_to_unix(datestring, lst):
     """
     from datetime import datetime, timedelta
     import re
+    import pytz
 
     rm = re.match('([0-9]{8})-([A-Z]{3})', datestring)
     if rm is None:
@@ -257,22 +258,21 @@ def utc_lst_to_unix(datestring, lst):
         raise ValueError(msg)
 
     datestring = rm.group(1)
-    time_zone = rm.group(2)
+    tzoffset = 0.0
+    tz = rm.group(2)
 
-    # Check for time zone
-    if time_zone == 'UTC':
-        date = datetime.strptime(datestring, '%Y%m%d')
+    tzs = {'PDT': -7., 'PST': -8., 'EDT': -4., 'EST': -5., 'UTC': 0.0}
 
-    elif time_zone == 'PST':
-        date = (datetime.strptime(datestring, '%Y%m%d')
-                + timedelta(hours=8))
+    if tz is not None:
+        try:
+            tzoffset = tzs[tz.upper()]
+        except:
+            print("Time zone {} not known. Known time zones:".format(tz))
+            for key, value in tzs.items():
+                print(key, value)
+            print("Using UTC{:+.1f}.".format(tzoffset))
 
-    elif time_zone == 'PDT':
-        date = (datetime.strptime(datestring, '%Y%m%d')
-                + timedelta(hours=7))
-    else:
-        msg = 'Warning: You need to assign a time zone to the dates.'
-        print(msg)
+    date = datetime.strptime(datestring, '%Y%m%d') + timedelta(hours=tzoffset)
 
     # Get a chime observer
     obs = _get_chime()
