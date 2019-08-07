@@ -231,6 +231,98 @@ def galt_pointing_model_dec(ha_in, dec_in,
 
     return Angle(degrees=delta_dec/60.)
 
+def utc_lst_to_unix(datestring, lst):
+    """Convert datetime string and LST to corresponding Unix time
+    
+    Parameters
+    ----------
+    datestring : string
+        Date as YYYYMMDD-AAA, where AAA is one of [UTC, PST, PDT]
+    lst : float
+        Local sidereal time at DRAO (CHIME) in decimal hours
+        
+    Returns
+    -------
+    float
+        Unix time in seconds
+    """
+    from datetime import datetime, timedelta
+    import re
+
+    rm = re.match('([0-9]{8})-([A-Z]{3})', datestring)
+    if rm is None:
+        msg = ("Wrong format for datestring: {0}.".format(datestring)
+               + "\nShould be YYYYMMDD-AAA, "
+               + "where AAA is one of [UTC,PST,PDT]")
+        raise ValueError(msg)
+
+    datestring = rm.group(1)
+    time_zone = rm.group(2)
+
+    # Check for time zone
+    if time_zone == 'UTC':
+        date = datetime.strptime(datestring, '%Y%m%d')
+
+    elif time_zone == 'PST':
+        date = (datetime.strptime(datestring, '%Y%m%d')
+                + timedelta(hours=8))
+
+    elif time_zone == 'PDT':
+        date = (datetime.strptime(datestring, '%Y%m%d')
+                + timedelta(hours=7))
+    else:
+        msg = 'Warning: You need to assign a time zone to the dates.'
+        print(msg)
+
+    # Get a chime observer
+    obs = ephemeris._get_chime()
+    # Assign chime observer a date
+    obs.date = date
+
+    # Convert date to LST
+    date_in_lst = obs.sidereal_time() * 12. / np.pi
+
+    # If start of date is greater than LST subtract 24 hours
+    if date_in_lst > lst:
+        date_in_lst = date_in_lst - 24.
+
+    # Calculte difference between LST and start of day in LST
+    # and convert to unix time
+    d_lst = lst - date_in_lst
+    d_unix = d_lst * (3600.) * ephemeris.SIDEREAL_S
+    date_unix = ephemeris.datetime_to_unix(date)
+
+    # Get the start or end of observation in unix time
+    unix = date_unix + d_unix
+
+    return unix
+
+def sidlst_to_csd(sid, lst, sid_ref, t_ref):
+    """
+    Convert an integer DRAO sidereal day and LST to a float
+    CHIME sidereal day
+
+    Parameters
+    ----------
+    sid : int
+        DRAO sidereal day
+    lst : float, in hours
+        local sidereal time
+    sid_ref : int
+        DRAO sidereal day at the reference time t_ref
+    t_ref : skyfield time object, Julian days
+        Reference time
+
+    Returns
+    -------
+    output : float
+        CHIME sidereal day
+    """
+    csd_ref = int(ephemeris.csd(
+        ephemeris.datetime_to_unix(t_ref.utc_datetime())))
+    csd = sid - sid_ref + csd_ref
+    return csd + lst / ephemeris.SIDEREAL_S / 24.0
+
 
 def sphdist(long1, lat1, long2, lat2):
     """

@@ -92,63 +92,10 @@ class HolographyObservation(base_model):
         notes : string, optional
             Any notes on this observation.
         """
+        
+        from ephemeris import utc_lst_to_unix
 
-        def _utc_lst_to_unix(datestring, lst):
-            """
-            day : of class datetime
-            lst: in hours
-            """
-            from datetime import datetime, timedelta
-
-            rm = re.match('([0-9]{8})-([A-Z]{3})', datestring)
-            if rm is None:
-                msg = ("Wrong format for datestring: {0}.".format(datestring)
-                       + "\nShould be YYYYMMDD-AAA, "
-                       + "where AAA is one of [UTC,PST,PDT]")
-                raise ValueError(msg)
-
-            datestring = rm.group(1)
-            time_zone = rm.group(2)
-
-            # Check for time zone
-            if time_zone == 'UTC':
-                date = datetime.strptime(datestring, '%Y%m%d')
-
-            elif time_zone == 'PST':
-                date = (datetime.strptime(datestring, '%Y%m%d')
-                        + timedelta(hours=8))
-
-            elif time_zone == 'PDT':
-                date = (datetime.strptime(datestring, '%Y%m%d')
-                        + timedelta(hours=7))
-            else:
-                msg = 'Warning: You need to assign a time zone to the dates.'
-                print(msg)
-
-            # Get a chime observer
-            obs = ephemeris._get_chime()
-            # Assign chime observer a date
-            obs.date = date
-
-            # Convert date to LST
-            date_in_lst = obs.sidereal_time() * 12. / np.pi
-
-            # If start of date is greater than LST subtract 24 hours
-            if date_in_lst > lst:
-                date_in_lst = date_in_lst - 24.
-
-            # Calculte difference between LST and start of day in LST
-            # and convert to unix time
-            d_lst = lst - date_in_lst
-            d_unix = d_lst * (3600.) * ephemeris.SIDEREAL_S
-            date_unix = ephemeris.datetime_to_unix(date)
-
-            # Get the start or end of observation in unix time
-            unix = date_unix + d_unix
-
-            return unix
-
-        start_time = _utc_lst_to_unix(start_day, start_lst)
+        start_time = utc_lst_to_unix(start_day, start_lst)
         duration_unix = duration_lst * (3600.) * ephemeris.SIDEREAL_S
 
         finish_time = start_time + duration_unix
@@ -539,32 +486,8 @@ class HolographyObservation(base_model):
         from caput import time as ctime
 
         DRAO_lon = ephemeris.CHIMELONGITUDE * 24.0/360.0
-
-        def sidlst_to_csd(sid, lst, sid_ref, t_ref):
-            """
-            Convert an integer DRAO sidereal day and LST to a float
-            CHIME sidereal day
-
-            Parameters
-            ----------
-            sid : int
-                DRAO sidereal day
-            lst : float, in hours
-                local sidereal time
-            sid_ref : int
-                DRAO sidereal day at the reference time t_ref
-            t_ref : skyfield time object, Julian days
-                Reference time
-
-            Returns
-            -------
-            output : float
-                CHIME sidereal day
-            """
-            csd_ref = int(ephemeris.csd(
-                ephemeris.datetime_to_unix(t_ref.utc_datetime())))
-            csd = sid - sid_ref + csd_ref
-            return csd + lst / ephemeris.SIDEREAL_S / 24.0
+        
+        from ephemeris import sidlst_to_csd
 
         ant_data_list = []
         post_report_list = []
