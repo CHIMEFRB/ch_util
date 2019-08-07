@@ -275,7 +275,7 @@ def utc_lst_to_unix(datestring, lst):
         print(msg)
 
     # Get a chime observer
-    obs = ephemeris._get_chime()
+    obs = _get_chime()
     # Assign chime observer a date
     obs.date = date
 
@@ -289,13 +289,30 @@ def utc_lst_to_unix(datestring, lst):
     # Calculte difference between LST and start of day in LST
     # and convert to unix time
     d_lst = lst - date_in_lst
-    d_unix = d_lst * (3600.) * ephemeris.SIDEREAL_S
-    date_unix = ephemeris.datetime_to_unix(date)
+    d_unix = d_lst * (3600.) * SIDEREAL_S
+    date_unix = datetime_to_unix(date)
 
     # Get the start or end of observation in unix time
     unix = date_unix + d_unix
 
     return unix
+    
+def utc_lst_to_mjd(datestring, lst):
+    """Convert datetime string and LST to corresponding modified Julian Day
+    
+    Parameters
+    ----------
+    datestring : string
+        Date as YYYYMMDD-AAA, where AAA is one of [UTC, PST, PDT]
+    lst : float
+        Local sidereal time at DRAO (CHIME) in decimal hours
+        
+    Returns
+    -------
+    float
+        MJD
+    """
+    return ctime.unix_to_skyfield_time(utc_lst_to_unix(datestring, lst)).tt - 2400000.5
 
 def sidlst_to_csd(sid, lst, sid_ref, t_ref):
     """
@@ -319,9 +336,9 @@ def sidlst_to_csd(sid, lst, sid_ref, t_ref):
         CHIME sidereal day
     """
     csd_ref = int(ephemeris.csd(
-        ephemeris.datetime_to_unix(t_ref.utc_datetime())))
+        datetime_to_unix(t_ref.utc_datetime())))
     csd = sid - sid_ref + csd_ref
-    return csd + lst / ephemeris.SIDEREAL_S / 24.0
+    return csd + lst / SIDEREAL_S / 24.0
 
 
 def sphdist(long1, lat1, long2, lat2):
