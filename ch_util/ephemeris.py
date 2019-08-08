@@ -231,7 +231,7 @@ def galt_pointing_model_dec(ha_in, dec_in,
 
     return Angle(degrees=delta_dec/60.)
 
-def utc_lst_to_unix(datestring, lst):
+def utc_lst_to_unix(datestring, lst, verbose=False):
     """Convert datetime string and LST to corresponding Unix time
     
     Parameters
@@ -272,32 +272,36 @@ def utc_lst_to_unix(datestring, lst):
                 print(key, value)
             print("Using UTC{:+.1f}.".format(tzoffset))
 
-    date = datetime.strptime(datestring, '%Y%m%d') + timedelta(hours=tzoffset)
+    date = datetime.strptime(datestring, '%Y%m%d') - timedelta(hours=tzoffset)
 
-    # Get a chime observer
     obs = _get_chime()
-    # Assign chime observer a date
     obs.date = date
-
-    # Convert date to LST
+    # Convert midnight in specified time zone to hours of LST at CHIME
     date_in_lst = obs.sidereal_time() * 12. / np.pi
 
-    # If start of date is greater than LST subtract 24 hours
+    if verbose:
+        print('{} UTC is {:.2f} hours LST; desired LST is {:.2f} hours'.format(
+                date, date_in_lst, lst))
+
+    # If midnight in specified time zone is greater than LST subtract 24 hours
+    # to put the LST on the desired day
     if date_in_lst > lst:
         date_in_lst = date_in_lst - 24.
 
     # Calculte difference between LST and start of day in LST
-    # and convert to unix time
     d_lst = lst - date_in_lst
+    # convert from sidereal hours to Unix seconds
     d_unix = d_lst * (3600.) * SIDEREAL_S
-    date_unix = datetime_to_unix(date)
 
-    # Get the start or end of observation in unix time
-    unix = date_unix + d_unix
+    unix = datetime_to_unix(date) + d_unix
+
+    if verbose:
+        print('Date is {}'.format(datetime.fromtimestamp(unix).strftime(
+                '%Y-%m-%d %H:%M')))
 
     return unix
     
-def utc_lst_to_mjd(datestring, lst):
+def utc_lst_to_mjd(datestring, lst, verbose=False):
     """Convert datetime string and LST to corresponding modified Julian Day
     
     Parameters
@@ -312,7 +316,8 @@ def utc_lst_to_mjd(datestring, lst):
     float
         MJD
     """
-    return ctime.unix_to_skyfield_time(utc_lst_to_unix(datestring, lst)).tt - 2400000.5
+    return ctime.unix_to_skyfield_time(utc_lst_to_unix(
+                datestring, lst, verbose=verbose)).tt - 2400000.5
 
 def sidlst_to_csd(sid, lst, sid_ref, t_ref):
     """
