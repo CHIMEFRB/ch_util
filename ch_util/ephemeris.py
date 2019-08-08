@@ -231,16 +231,17 @@ def galt_pointing_model_dec(ha_in, dec_in,
 
     return Angle(degrees=delta_dec/60.)
 
+
 def utc_lst_to_unix(datestring, lst, verbose=False):
     """Convert datetime string and LST to corresponding Unix time
-    
+
     Parameters
     ----------
     datestring : string
         Date as YYYYMMDD-AAA, where AAA is one of [UTC, PST, PDT]
     lst : float
         Local sidereal time at DRAO (CHIME) in decimal hours
-        
+
     Returns
     -------
     float
@@ -281,7 +282,7 @@ def utc_lst_to_unix(datestring, lst, verbose=False):
 
     if verbose:
         print('{} UTC is {:.2f} hours LST; desired LST is {:.2f} hours'.format(
-                date, date_in_lst, lst))
+            date, date_in_lst, lst))
 
     # If midnight in specified time zone is greater than LST subtract 24 hours
     # to put the LST on the desired day
@@ -297,27 +298,29 @@ def utc_lst_to_unix(datestring, lst, verbose=False):
 
     if verbose:
         print('Date is {}'.format(datetime.fromtimestamp(unix).strftime(
-                '%Y-%m-%d %H:%M')))
+            '%Y-%m-%d %H:%M')))
 
     return unix
-    
+
+
 def utc_lst_to_mjd(datestring, lst, verbose=False):
     """Convert datetime string and LST to corresponding modified Julian Day
-    
+
     Parameters
     ----------
     datestring : string
         Date as YYYYMMDD-AAA, where AAA is one of [UTC, PST, PDT]
     lst : float
         Local sidereal time at DRAO (CHIME) in decimal hours
-        
+
     Returns
     -------
     float
         MJD
     """
     return ctime.unix_to_skyfield_time(utc_lst_to_unix(
-                datestring, lst, verbose=verbose)).tt - 2400000.5
+        datestring, lst, verbose=verbose)).tt - 2400000.5
+
 
 def sidlst_to_csd(sid, lst, sid_ref, t_ref):
     """
