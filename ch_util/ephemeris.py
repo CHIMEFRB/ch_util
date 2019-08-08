@@ -275,32 +275,8 @@ def utc_lst_to_unix(datestring, lst, verbose=False):
 
     date = datetime.strptime(datestring, '%Y%m%d') - timedelta(hours=tzoffset)
 
-    obs = _get_chime()
-    obs.date = date
-    # Convert midnight in specified time zone to hours of LST at CHIME
-    date_in_lst = obs.sidereal_time() * 12. / np.pi
-
-    if verbose:
-        print('{} UTC is {:.2f} hours LST; desired LST is {:.2f} hours'.format(
-            date, date_in_lst, lst))
-
-    # If midnight in specified time zone is greater than LST subtract 24 hours
-    # to put the LST on the desired day
-    if date_in_lst > lst:
-        date_in_lst = date_in_lst - 24.
-
-    # Calculte difference between LST and start of day in LST
-    d_lst = lst - date_in_lst
-    # convert from sidereal hours to Unix seconds
-    d_unix = d_lst * (3600.) * SIDEREAL_S
-
-    unix = datetime_to_unix(date) + d_unix
-
-    if verbose:
-        print('Date is {}'.format(datetime.fromtimestamp(unix).strftime(
-            '%Y-%m-%d %H:%M')))
-
-    return unix
+    # lsa_to_unix wants LST in degrees
+    return lsa_to_unix(lst*360/24, datetime_to_unix(date))
 
 
 def utc_lst_to_mjd(datestring, lst, verbose=False):

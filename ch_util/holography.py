@@ -92,7 +92,7 @@ class HolographyObservation(base_model):
         notes : string, optional
             Any notes on this observation.
         """
-        
+
         from ephemeris import utc_lst_to_unix
 
         start_time = utc_lst_to_unix(start_day, start_lst)
@@ -101,7 +101,7 @@ class HolographyObservation(base_model):
         finish_time = start_time + duration_unix
 
         return cls.create(source=source, start_time=start_time,
-                finish_time=finish_time, quality_flag=quality_flag, notes=notes)
+                          finish_time=finish_time, quality_flag=quality_flag, notes=notes)
 
     # Aliases of source names in the spreadsheet to ones we use in the database
     # (hard-coded at initialization, but user should be able to edit)
@@ -188,8 +188,8 @@ class HolographyObservation(base_model):
                 # convert Julian Date to Skyfield time object
                 if(l.find('JULIAN DATE')) != -1:
                     output_params['start_time'] = ts.ut1(
-                        jd=float(re.search('JULIAN DATE:\s+(.*?)\s+', l) \
-                                .group(1)))
+                        jd=float(re.search('JULIAN DATE:\s+(.*?)\s+', l)
+                                 .group(1)))
 
                 if l.find('SID:') != -1:
                     output_params['SID'] = int(
@@ -252,7 +252,8 @@ class HolographyObservation(base_model):
 
                 if len(onsource) > 0:
                     stdoffset = np.std(dist.degrees[onsource[0]:onsource[-1]])
-                    meanoffset = np.mean(dist.degrees[onsource[0]:onsource[-1]])
+                    meanoffset = np.mean(
+                        dist.degrees[onsource[0]:onsource[-1]])
                     obs = {'src': post_report_params['src'],
                            'start_time': ant_log['t'][onsource[0]],
                            'finish_time': ant_log['t'][onsource[-1]],
@@ -264,11 +265,11 @@ class HolographyObservation(base_model):
                     if stdoffset > 0.05 or meanoffset > ONSOURCE_DIST_TO_FLAG:
                         obs['quality_flag'] += QUALITY_OFFSOURCE
                         print('Mean offset: {:.4f}. Std offset: {:.4f}. '
-                                + 'Setting quality flag to {}.'.format(
-                                    meanoffset, stdoffset, QUALITY_OFFSOURCE))
+                              + 'Setting quality flag to {}.'.format(
+                                  meanoffset, stdoffset, QUALITY_OFFSOURCE))
                         noteout = 'Questionable on source. '
                         + 'Mean, STD(offset) : {:.3f}, {:.3f}. {}'.format(
-                                meanoffset, stdoffset, noteout)
+                            meanoffset, stdoffset, noteout)
                     if verbose:
                         print('Times in .ANT log    : {} {}'.format(
                             ant_log['t'][onsource[0]].utc_strftime(
@@ -278,25 +279,25 @@ class HolographyObservation(base_model):
                         print('Times in .POST_REPORT: {} {}'.format(
                             post_report_params['start_time'].utc_strftime(
                                 DATE_FMT_STR),
-                            post_report_params['finish_time'] \
-                                    .utc_strftime(DATE_FMT_STR)))
-                        print('Mean offset: {:.4f}. Std offset: {:.4f}.' \
-                                .format(meanoffset, stdoffset))
+                            post_report_params['finish_time']
+                            .utc_strftime(DATE_FMT_STR)))
+                        print('Mean offset: {:.4f}. Std offset: {:.4f}.'
+                              .format(meanoffset, stdoffset))
 
                     cls.create_from_dict(obs, verbose=verbose, notes=noteout,
-                            **kwargs)
+                                         **kwargs)
                 else:
                     print('No on source time found for {}\n{} {}\n'
-                            + 'Min distance from source {:.1f} degrees' \
-                            .format(
-                                curlog,
-                                post_report_params['src'].name,
-                                post_report_params['start_time'].utc_strftime(
-                                    '%Y-%m-%d %H:%M'),
-                                np.min(dist.degrees)))
+                          + 'Min distance from source {:.1f} degrees'
+                          .format(
+                              curlog,
+                              post_report_params['src'].name,
+                              post_report_params['start_time'].utc_strftime(
+                                  '%Y-%m-%d %H:%M'),
+                              np.min(dist.degrees)))
             else:
-                print('{} is not a HolographySource; need to add to database?' \
-                        .format(post_report_params['src']))
+                print('{} is not a HolographySource; need to add to database?'
+                      .format(post_report_params['src']))
                 print('Doing nothing')
 
     @classmethod
@@ -366,10 +367,10 @@ class HolographyObservation(base_model):
                         if ignore_src_mismatch:
                             dup_found = True
                         print('** Observation at same time but with different '
-                                + 'sources in database: ',
-                                src.name,
-                                entry.source.name,
-                                tt.utc_datetime().isoformat())
+                              + 'sources in database: ',
+                              src.name,
+                              entry.source.name,
+                              tt.utc_datetime().isoformat())
                         # if the observations match in start time and source,
                         # call them the same observation. Not the most strict
                         # check possible.
@@ -377,14 +378,14 @@ class HolographyObservation(base_model):
                     if dup_found:
                         tf = ts.utc(
                             ephemeris.unix_to_datetime(entry.finish_time))
-                        print('Tried to add  :  {} {}; LST={:.3f}' \
-                                .format(src.name,
-                                    t.utc_datetime().strftime(DATE_FMT_STR),
-                                    ttlst))
-                        print('Existing entry:  {} {}; LST={:.3f}' \
-                                .format(entry.source.name,
-                                    tt.utc_datetime().strftime(DATE_FMT_STR),
-                                    ttlst))
+                        print('Tried to add  :  {} {}; LST={:.3f}'
+                              .format(src.name,
+                                      t.utc_datetime().strftime(DATE_FMT_STR),
+                                      ttlst))
+                        print('Existing entry:  {} {}; LST={:.3f}'
+                              .format(entry.source.name,
+                                      tt.utc_datetime().strftime(DATE_FMT_STR),
+                                      ttlst))
             if dup_found:
                 return existing_db_entry
             else:
@@ -408,18 +409,18 @@ class HolographyObservation(base_model):
                         cls.delete_instance(entry)
                         if verbose:
                             print('Deleted observation from database and '
-                                    + 'replacing.')
+                                  + 'replacing.')
                 elif verbose:
                     print('Would have deleted observation and replaced '
-                            + '(dry run).')
+                          + '(dry run).')
                 addtodb = True
             else:
                 addtodb = False
                 for entry in dup_entries:
                     print("Not replacing duplicate {} observation {}".format(
                         entry.source.name,
-                        ephemeris.unix_to_datetime(entry.start_time) \
-                                .strftime(DATE_FMT_STR)))
+                        ephemeris.unix_to_datetime(entry.start_time)
+                        .strftime(DATE_FMT_STR)))
 
         # we've appended this observation to obslist.
         # Now add to the database, if we're supposed to.
@@ -486,8 +487,32 @@ class HolographyObservation(base_model):
         from caput import time as ctime
 
         DRAO_lon = ephemeris.CHIMELONGITUDE * 24.0/360.0
-        
-        from ephemeris import sidlst_to_csd
+
+        def sidlst_to_csd(sid, lst, sid_ref, t_ref):
+            """
+            Convert an integer DRAO sidereal day and LST to a float
+            CHIME sidereal day
+
+            Parameters
+            ----------
+            sid : int
+                DRAO sidereal day
+            lst : float, in hours
+                local sidereal time
+            sid_ref : int
+                DRAO sidereal day at the reference time t_ref
+            t_ref : skyfield time object, Julian days
+                Reference time
+
+            Returns
+            -------
+            output : float
+                CHIME sidereal day
+            """
+            csd_ref = int(ephemeris.csd(
+                datetime_to_unix(t_ref.utc_datetime())))
+            csd = sid - sid_ref + csd_ref
+            return csd + lst / SIDEREAL_S / 24.0
 
         ant_data_list = []
         post_report_list = []
@@ -571,34 +596,34 @@ class HolographyObservation(base_model):
                         ha = Angle(hours=(hah, ham, has))
                         dec = Angle(degrees=(decd, decm, decs))
 
-                        ant_data['ha'] = Angle(radians = ha.radians \
-                                - ephemeris.galt_pointing_model_ha(ha,dec) \
-                                .radians, preference = 'hours')
+                        ant_data['ha'] = Angle(radians=ha.radians
+                                               - ephemeris.galt_pointing_model_ha(ha, dec)
+                                               .radians, preference='hours')
 
-                        ant_data['dec_cirs'] = Angle(radians = dec.radians \
-                                - ephemeris.galt_pointing_model_dec(ha,dec) \
-                                .radians, preference = 'degrees')
+                        ant_data['dec_cirs'] = Angle(radians=dec.radians
+                                                     - ephemeris.galt_pointing_model_dec(ha, dec)
+                                                     .radians, preference='degrees')
 
                         ant_data['csd'] = sidlst_to_csd(
-                                np.array(ant_data['sid']),
-                                ant_data['lst'].hours,
-                                post_report_params['SID'],
-                                post_report_params['start_time'])
+                            np.array(ant_data['sid']),
+                            ant_data['lst'].hours,
+                            post_report_params['SID'],
+                            post_report_params['start_time'])
 
                     ant_data['t'] = ephemeris.unix_to_skyfield_time(
                         ephemeris.csd_to_unix(ant_data['csd']))
 
                     # Correct RA from equinox to CIRS coords (both in radians)
                     era = np.radians(
-                            ctime.unix_to_era(
-                                ephemeris.ensure_unix(ant_data['t'])))
+                        ctime.unix_to_era(
+                            ephemeris.ensure_unix(ant_data['t'])))
                     gast = ant_data['t'].gast * 2 * np.pi / 24.0
 
                     ant_data['ra_cirs'] = Angle(
-                            radians=ant_data['lst'].radians \
-                                    - ant_data['ha'].radians \
-                                    + (era - gast),
-                                    preference = 'hours')
+                        radians=ant_data['lst'].radians
+                                - ant_data['ha'].radians
+                                + (era - gast),
+                        preference='hours')
 
                     obs = ephemeris.Star_cirs(ra=ant_data['ra_cirs'],
                                               dec=ant_data['dec_cirs'],
@@ -606,7 +631,6 @@ class HolographyObservation(base_model):
 
                     ant_data['ra'] = obs.ra
                     ant_data['dec'] = obs.dec
-
 
                     ant_data_list.append(ant_data)
                     post_report_list.append(post_report_params)
@@ -722,5 +746,5 @@ class HolographyObservation(base_model):
                     addtodb = False
                 else:
                     cls.create_from_dict(output_params, notes=notes,
-                            start_tol=start_tol, dryrun=dryrun,
-                            replace_dup=replace_dup, verbose=verbose)
+                                         start_tol=start_tol, dryrun=dryrun,
+                                         replace_dup=replace_dup, verbose=verbose)
