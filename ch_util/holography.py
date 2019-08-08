@@ -170,6 +170,7 @@ class HolographyObservation(base_model):
 
         """
         from skyfield.api import load
+        import re
         ts = load.timescale()
 
         output_params = {}
