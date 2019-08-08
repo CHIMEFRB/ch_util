@@ -298,33 +298,6 @@ def utc_lst_to_mjd(datestring, lst, verbose=False):
         datestring, lst, verbose=verbose)).tt - 2400000.5
 
 
-def sidlst_to_csd(sid, lst, sid_ref, t_ref):
-    """
-    Convert an integer DRAO sidereal day and LST to a float
-    CHIME sidereal day
-
-    Parameters
-    ----------
-    sid : int
-        DRAO sidereal day
-    lst : float, in hours
-        local sidereal time
-    sid_ref : int
-        DRAO sidereal day at the reference time t_ref
-    t_ref : skyfield time object, Julian days
-        Reference time
-
-    Returns
-    -------
-    output : float
-        CHIME sidereal day
-    """
-    csd_ref = int(ephemeris.csd(
-        datetime_to_unix(t_ref.utc_datetime())))
-    csd = sid - sid_ref + csd_ref
-    return csd + lst / SIDEREAL_S / 24.0
-
-
 def sphdist(long1, lat1, long2, lat2):
     """
     Return the angular distance between two coordinates.
