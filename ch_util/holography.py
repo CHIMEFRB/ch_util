@@ -510,9 +510,9 @@ class HolographyObservation(base_model):
                 CHIME sidereal day
             """
             csd_ref = int(ephemeris.csd(
-                datetime_to_unix(t_ref.utc_datetime())))
+                ephemeris.datetime_to_unix(t_ref.utc_datetime())))
             csd = sid - sid_ref + csd_ref
-            return csd + lst / SIDEREAL_S / 24.0
+            return csd + lst / ephemeris.SIDEREAL_S / 24.0
 
         ant_data_list = []
         post_report_list = []
