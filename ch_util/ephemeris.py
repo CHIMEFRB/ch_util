@@ -232,24 +232,21 @@ def galt_pointing_model_dec(ha_in, dec_in,
     return Angle(degrees=delta_dec/60.)
 
 
-def utc_lst_to_unix(datestring, lst, verbose=False):
-    """Convert datetime string and LST to corresponding Unix time
+def parse_date_string(datestring):
+    """Convert string in YYYYMMDD-TZ format to unix time at midnight
 
     Parameters
     ----------
     datestring : string
-        Date as YYYYMMDD-AAA, where AAA is one of [UTC, PST, PDT]
-    lst : float
-        Local sidereal time at DRAO (CHIME) in decimal hours
+        Date as YYYYMMDD-AAA, where AAA is one of [UTC, PST, PDT, EST, EDT]
 
     Returns
     -------
     float
-        Unix time in seconds
+        Unix time at midnight in the specified time zone on that day
     """
     from datetime import datetime, timedelta
     import re
-    import pytz
 
     rm = re.match('([0-9]{8})-([A-Z]{3})', datestring)
     if rm is None:
@@ -273,13 +270,73 @@ def utc_lst_to_unix(datestring, lst, verbose=False):
                 print(key, value)
             print("Using UTC{:+.1f}.".format(tzoffset))
 
-    date = datetime.strptime(datestring, '%Y%m%d') - timedelta(hours=tzoffset)
-
-    # lsa_to_unix wants LST in degrees
-    return lsa_to_unix(lst*360/24, datetime_to_unix(date))
+    return datetime_to_unix(datetime.strptime(datestring, '%Y%m%d') -
+        timedelta(hours=tzoffset))
 
 
-def utc_lst_to_mjd(datestring, lst, verbose=False):
+def lsa_to_mjd(lsa, t_ref=None):
+    """Convert local sidereal angle to modified Julian day
+    
+    Parameters
+    ----------
+    lsa : float
+        local sidereal angle in degrees
+    t_ref : float (default: None)
+        if specified, the reference time (in any format that
+        caput.time.ensure_unix understands). If None, the current time.
+    
+    Returns
+    -------
+    float
+        first modified Julian day at the specified lsa after t_ref
+    """
+    import time
+    
+    if t_ref:
+        t = t_ref
+    else:
+        t = time.time()
+        
+    unix = lsa_to_unix(lsa, ensure_unix(t))
+    return unix_to_mjd(unix)
+
+
+def unix_to_mjd(time):
+    """Convert Unix time to modified Julian Day
+    
+    Parameters
+    ----------
+    time : float
+        Unix time
+    
+    Returns
+    -------
+    float
+        MJD
+    """
+    return ctime.unix_to_skyfield_time(time).tt - 2400000.5
+
+
+def mjd_to_unix(mjd):
+    """Convert modified Julian Day to Unix time
+    
+    Parameters
+    ----------
+    mjd : float
+        MJD
+    
+    Returns
+    -------
+    float
+        Unix time
+    """
+    from skyfield.api import load
+    
+    ts = load.timescale()
+    return ensure_unix(ts.tt_jd(mjd + 2400000.5))
+
+
+def utc_lst_to_mjd(datestring, lst):
     """Convert datetime string and LST to corresponding modified Julian Day
 
     Parameters
@@ -295,7 +352,7 @@ def utc_lst_to_mjd(datestring, lst, verbose=False):
         MJD
     """
     return ctime.unix_to_skyfield_time(utc_lst_to_unix(
-        datestring, lst, verbose=verbose)).tt - 2400000.5
+        datestring, lst)).tt - 2400000.5
 
 
 def sphdist(long1, lat1, long2, lat2):

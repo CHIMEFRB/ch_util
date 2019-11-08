@@ -9,4 +9,4 @@ peewee < 3
 bitshuffle @ git+https://github.com/kiyo-masui/bitshuffle.git
 caput @ git+https://github.com/radiocosmology/caput.git#egg=caput
 skyfield >= 1.10
-mpi4py
+#mpi4py
