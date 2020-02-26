@@ -34,10 +34,10 @@ Functions
 from __future__ import absolute_import, division, print_function, unicode_literals
 from future.builtins import *  # noqa  pylint: disable=W0401, W0614
 from future.builtins.disabled import *  # noqa  pylint: disable=W0401, W0614
+from past.builtins import basestring
 
 # === End Python 2/3 compatibility
 
-from past.builtins import basestring
 from abc import ABCMeta, abstractmethod
 import os, fnmatch
 import inspect
@@ -50,6 +50,7 @@ import numpy as np
 import base64
 import datetime, time
 
+from caput import misc
 from . import ephemeris
 from future.utils import with_metaclass
 
@@ -506,7 +507,7 @@ class FluxCatalog(with_metaclass(MetaFluxCatalog, object)):
             )
 
             # Populate the kwargs that were used
-            arg_list = inspect.getargspec(self.model_lookup[self.model].__init__)
+            arg_list = misc.getfullargspec(self.model_lookup[self.model].__init__)
             if len(arg_list.args) > 1:
                 keys = arg_list.args[1:]
                 for key in keys:
@@ -590,7 +591,7 @@ class FluxCatalog(with_metaclass(MetaFluxCatalog, object)):
             self.measurements += meas
 
         # Sort internal list by frequency
-        isort = sorted(list(range(len(self))), key=freq.__getitem__)
+        isort = np.argsort(self.freq)
         self.measurements = [self.measurements[mm] for mm in isort]
 
     def fit_model(self):
@@ -599,7 +600,7 @@ class FluxCatalog(with_metaclass(MetaFluxCatalog, object)):
         'param', 'param_cov', and 'stats' attributes.
         """
 
-        arg_list = inspect.getargspec(self._model.fit).args[1:]
+        arg_list = misc.getfullargspec(self._model.fit).args[1:]
 
         args = [self.freq[self.flag], self.flux[self.flag], self.eflux[self.flag]]
 
@@ -683,9 +684,9 @@ class FluxCatalog(with_metaclass(MetaFluxCatalog, object)):
 
         # Plot the measurements
         if catalog:
-            cat_uniq = np.unique(self.catalog)
+            cat_uniq = list(set(self.catalog))
         else:
-            cat_uniq = np.unique(self.citation)
+            cat_uniq = list(set(self.citation))
 
         # Loop over catalogs/citations
         for ii, cat in enumerate(cat_uniq):
@@ -774,7 +775,7 @@ class FluxCatalog(with_metaclass(MetaFluxCatalog, object)):
 
         """
 
-        arg_list = inspect.getargspec(self._model.predict).args[1:]
+        arg_list = misc.getfullargspec(self._model.predict).args[1:]
 
         if (epoch is not None) and ("epoch" in arg_list):
             args = [freq, epoch]
@@ -804,7 +805,7 @@ class FluxCatalog(with_metaclass(MetaFluxCatalog, object)):
 
         """
 
-        arg_list = inspect.getargspec(self._model.uncertainty).args[1:]
+        arg_list = misc.getfullargspec(self._model.uncertainty).args[1:]
 
         if (epoch is not None) and ("epoch" in arg_list):
             args = [freq, epoch]
@@ -855,7 +856,6 @@ class FluxCatalog(with_metaclass(MetaFluxCatalog, object)):
     def __len__(self):
         """ Returns the number of measurements of the source.
         """
-
         return len(self.measurements) if self.measurements is not None else 0
 
     def print_measurements(self):
@@ -1036,7 +1036,7 @@ class FluxCatalog(with_metaclass(MetaFluxCatalog, object)):
 
         """
 
-        arg_list = inspect.getargspec(cls.__init__).args[2:]
+        arg_list = misc.getfullargspec(cls.__init__).args[2:]
 
         kwargs = {
             field: flux_body_dict[field]
@@ -1501,7 +1501,7 @@ def _print_collection_summary(collection_name, source_names, verbose=True):
 
 def _ensure_list(obj, num=None):
 
-    if hasattr(obj, "__iter__"):
+    if hasattr(obj, "__iter__") and not isinstance(obj, basestring):
         nnum = len(obj)
         if (num is not None) and (nnum != num):
             ValueError("Input list has wrong size.")
