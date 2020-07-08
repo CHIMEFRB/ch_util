@@ -17,26 +17,22 @@ ch_util_data = {
     bytes_to_native_str(b"ch_util"): ["catalogs/*.json"],
 }
 
+# Load the PEP508 formatted requirements from the requirements.txt file. Needs
+# pip version > 19.0
+with open("requirements.txt", "r") as fh:
+    requires = fh.readlines()
+
 setup(
     name="ch_util",
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
     packages=find_packages(),
-    install_requires=[
-        "chimedb @ git+ssh://git@github.com/chime-experiment/chimedb.git",
-        "chimedb.config @ git+ssh://git@github.com/chime-experiment/chimedb_config.git",
-        "chimedb.data_index @ git+ssh://git@github.com/chime-experiment/chimedb_di.git",
-        "chimedb.dataflag @ git+ssh://git@github.com/chime-experiment/chimedb_dataflag.git",
-        "caput @ git+https://github.com/radiocosmology/caput.git",
-        "bitshuffle @ git+https://github.com/kiyo-masui/bitshuffle.git",
-        "numpy >= 1.15.1",
-        "scipy",
-        "networkx >= 2.0",
-        "h5py",
-        "peewee >= 3.10",
-        "skyfield >= 1.10",
-        "future",
-    ],
+    install_requires=requires,
+    extras_require={
+        "chimedb_config": [
+            "chimedb.config @ git+https://github.com/chime-experiment/chimedb_config.git"
+        ],
+    },
     package_data=ch_util_data,
     # metadata for upload to PyPI
     author="CHIME collaboration",
