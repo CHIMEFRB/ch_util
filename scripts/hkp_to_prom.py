@@ -1,15 +1,16 @@
-import requests
 import pandas as pd
 from ch_util.andata import HKPData
-from multiprocessing import Process, Pool
+import requests
+from mpi4py import MPI
 
-metrics = HKPData.metrics("/home/anja/scratch/hkp_prom_20200801.h5")
-f = HKPData.from_acq_h5("/home/anja/scratch/hkp_prom_20200801.h5", metrics=metrics)
-url = 'http://bao.chimenet.ca:3308/api/v1/import/prometheus'
 
-def worker(f, metric):
+def worker(metric):
+    print('starting worker')
 
+    url = 'http://bao.chimenet.ca:3308/api/v1/import/prometheus'
+    f = HKPData.from_acq_h5("/home/anja/scratch/hkp_prom_20200801.h5", metrics=[metric])
     df = f.select(metric)
+
 
     for time, row in df.iterrows():
         prom_metric = f"{metric}{{"
@@ -24,7 +25,17 @@ def worker(f, metric):
         prom_metric += f"{row['value']} {(time - pd.Timestamp('1970-01-01')) // pd.Timedelta('1ms')}"
         params=f"upload_file={prom_metric}"
         requests.post(url, params=params)
+    print(f'Finished {metric}')
 
-if __name__ == '__main__':
-    with Pool(47) as p:
-        p.map(worker, metrics)
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+
+if rank == 0:
+    metrics = HKPData.metrics("/home/anja/scratch/hkp_prom_20200801.h5")
+else:
+    metrics = []
+
+metrics = comm.bcast(list(metrics), root=0)
+
+worker(metrics[rank])
+
