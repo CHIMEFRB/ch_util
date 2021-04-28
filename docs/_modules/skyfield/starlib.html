@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>skyfield.starlib &mdash; ch_util 20.10.0+44.g2b46683 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/katex-math.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"></script>
+        <script src="../../_static/katex_autorenderer.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> ch_util
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                20.10.0+44.g2b46683
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../reference.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ch_util</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>skyfield.starlib</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for skyfield.starlib</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Python class for a distant object with, at most, proper motion.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">empty</span><span class="p">,</span> <span class="n">isnan</span><span class="p">,</span> <span class="n">outer</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">where</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="n">AU_KM</span><span class="p">,</span> <span class="n">ASEC2RAD</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">C_AUDAY</span><span class="p">,</span> <span class="n">DAY_S</span><span class="p">,</span> <span class="n">T0</span>
+<span class="kn">from</span> <span class="nn">.functions</span> <span class="kn">import</span> <span class="n">length_of</span>
+<span class="kn">from</span> <span class="nn">.relativity</span> <span class="kn">import</span> <span class="n">light_time_difference</span>
+<span class="kn">from</span> <span class="nn">.timelib</span> <span class="kn">import</span> <span class="n">Time</span>
+<span class="kn">from</span> <span class="nn">.units</span> <span class="kn">import</span> <span class="n">Angle</span>
+
+<span class="k">class</span> <span class="nc">Star</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The position in the sky of a star or other fixed object.</span>
+
+<span class="sd">    Each `Star` object specifies the position of a distant object.  You</span>
+<span class="sd">    should provide as a right ascension and declination relative to the</span>
+<span class="sd">    ICRS (the recent improvement upon J2000).  You can specify the</span>
+<span class="sd">    coordinates using either floating point hours and degrees, or tuples</span>
+<span class="sd">    that specify hour and degree fractions as minutes and seconds, or</span>
+<span class="sd">    even full Skyfield :class:`~skyfield.units.Angle` objects (which can</span>
+<span class="sd">    themselves be initialized using hours, degrees, or radians):</span>
+
+<span class="sd">    &gt;&gt;&gt; barnard = Star(ra_hours=17.963471675, dec_degrees=4.69339088889)</span>
+<span class="sd">    &gt;&gt;&gt; barnard = Star(ra_hours=(17, 57, 48.49), dec_degrees=(4, 41, 36.20))</span>
+<span class="sd">    &gt;&gt;&gt; barnard = Star(ra=Angle(hours=17.963471675),</span>
+<span class="sd">    ...                dec=Angle(degrees=4.69339088889))</span>
+
+<span class="sd">    For objects whose proper motion across the sky has been detected,</span>
+<span class="sd">    you can supply velocities in milliarcseconds (mas) per year, and</span>
+<span class="sd">    even a parallax and radial velocity if those are known:</span>
+
+<span class="sd">    &gt;&gt;&gt; barnard = Star(ra_hours=(17, 57, 48.49803),</span>
+<span class="sd">    ...                dec_degrees=(4, 41, 36.2072),</span>
+<span class="sd">    ...                ra_mas_per_year=-798.71,</span>
+<span class="sd">    ...                dec_mas_per_year=+10337.77,</span>
+<span class="sd">    ...                parallax_mas=545.4,</span>
+<span class="sd">    ...                radial_km_per_s=-110.6)</span>
+
+<span class="sd">    See `stars` for a guide to using a `Star` once you have created it.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">au_km</span> <span class="o">=</span> <span class="n">AU_KM</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ra</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dec</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ra_hours</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dec_degrees</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">ra_mas_per_year</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">dec_mas_per_year</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                 <span class="n">parallax_mas</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">radial_km_per_s</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">(),</span> <span class="n">epoch</span><span class="o">=</span><span class="n">T0</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">ra_hours</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ra</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">hours</span><span class="o">=</span><span class="n">ra_hours</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">Angle</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ra</span> <span class="o">=</span> <span class="n">ra</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;please provide either ra_hours=&lt;float&gt; or else&#39;</span>
+                            <span class="s1">&#39; ra=&lt;skyfield.units.Angle object&gt;&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">dec_degrees</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dec</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="n">degrees</span><span class="o">=</span><span class="n">dec_degrees</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">Angle</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">dec</span> <span class="o">=</span> <span class="n">dec</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;please provide either dec_degrees=&lt;float&gt; or else&#39;</span>
+                            <span class="s1">&#39; dec=&lt;skyfield.units.Angle object&gt;&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">Time</span><span class="p">):</span>
+            <span class="n">epoch</span> <span class="o">=</span> <span class="n">epoch</span><span class="o">.</span><span class="n">tt</span>
+        <span class="c1"># elif isinstance(epoch, float):</span>
+        <span class="c1">#     pass</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     raise ValueError(&#39;the epoch= must be a Time object, or&#39;</span>
+        <span class="c1">#                      &#39; a floating point Barycentric Dynamical Time (TDB)&#39;)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ra_mas_per_year</span> <span class="o">=</span> <span class="n">ra_mas_per_year</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dec_mas_per_year</span> <span class="o">=</span> <span class="n">dec_mas_per_year</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parallax_mas</span> <span class="o">=</span> <span class="n">parallax_mas</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radial_km_per_s</span> <span class="o">=</span> <span class="n">radial_km_per_s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span> <span class="o">=</span> <span class="n">epoch</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">names</span> <span class="o">=</span> <span class="n">names</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_compute_vectors</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">opts</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">,</span> <span class="s1">&#39;dec&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;ra_mas_per_year&#39;</span><span class="p">,</span> <span class="s1">&#39;dec_mas_per_year&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;parallax_mas&#39;</span><span class="p">,</span> <span class="s1">&#39;radial_km_per_s&#39;</span><span class="p">,</span>
+                     <span class="s1">&#39;names&#39;</span><span class="p">,</span> <span class="s1">&#39;epoch&#39;</span><span class="p">]:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Angle</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">_degrees</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">shape</span><span class="p">:</span>
+                <span class="n">shapes</span> <span class="o">=</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">shape</span><span class="p">)</span>
+                <span class="n">opts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> shape=</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">shapes</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">opts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="s1">=</span><span class="si">{1!r}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+        <span class="k">return</span> <span class="s1">&#39;Star(</span><span class="si">{0}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">opts</span><span class="p">))</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_dataframe</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
+        <span class="n">epoch</span> <span class="o">=</span> <span class="mf">1721045.0</span> <span class="o">+</span> <span class="n">_unwrap</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;epoch_year&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mf">365.25</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">ra_hours</span><span class="o">=</span><span class="n">_unwrap</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ra_hours&#39;</span><span class="p">]),</span>
+            <span class="n">dec_degrees</span><span class="o">=</span><span class="n">_unwrap</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;dec_degrees&#39;</span><span class="p">]),</span>
+            <span class="n">ra_mas_per_year</span><span class="o">=</span><span class="n">_unwrap</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ra_mas_per_year&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+            <span class="n">dec_mas_per_year</span><span class="o">=</span><span class="n">_unwrap</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;dec_mas_per_year&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+            <span class="n">parallax_mas</span><span class="o">=</span><span class="n">_unwrap</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;parallax_mas&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+            <span class="n">epoch</span><span class="o">=</span><span class="n">epoch</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_observe_from_bcrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">):</span>
+        <span class="n">position</span><span class="p">,</span> <span class="n">velocity</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_position_au</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_velocity_au_per_d</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">observer</span><span class="o">.</span><span class="n">t</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">light_time_difference</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">observer</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">au</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="p">(</span><span class="n">outer</span><span class="p">(</span><span class="n">velocity</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">tdb</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">position</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="n">position</span> <span class="o">+</span> <span class="n">velocity</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">tdb</span> <span class="o">+</span> <span class="n">dt</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">position</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">observer</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">au</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span> <span class="n">observer</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">au</span>
+                <span class="n">vel</span> <span class="o">=</span> <span class="p">(</span><span class="n">observer</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">au_per_d</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">velocity</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">vector</span> <span class="o">=</span> <span class="p">(</span><span class="n">position</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">observer</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">au</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+                <span class="n">vel</span> <span class="o">=</span> <span class="p">(</span><span class="n">observer</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">au_per_d</span> <span class="o">-</span> <span class="n">velocity</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">vector</span> <span class="o">=</span> <span class="n">position</span> <span class="o">-</span> <span class="n">observer</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">au</span>
+            <span class="n">vel</span> <span class="o">=</span> <span class="p">(</span><span class="n">observer</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">au_per_d</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">velocity</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">length_of</span><span class="p">(</span><span class="n">vector</span><span class="p">)</span>
+        <span class="n">light_time</span> <span class="o">=</span> <span class="n">distance</span> <span class="o">/</span> <span class="n">C_AUDAY</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">position</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="n">tt</span> <span class="o">=</span> <span class="n">empty</span><span class="p">(</span><span class="n">position</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">tt</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">tt</span><span class="p">)</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">ts</span><span class="o">.</span><span class="n">tt_jd</span><span class="p">(</span><span class="n">tt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vector</span><span class="p">,</span> <span class="n">vel</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">light_time</span>
+
+    <span class="k">def</span> <span class="nf">_compute_vectors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Compute the star&#39;s position as an ICRF position and velocity.&quot;&quot;&quot;</span>
+
+        <span class="c1"># Use 1 gigaparsec for stars whose parallax is zero.</span>
+
+        <span class="n">parallax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallax_mas</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">parallax</span><span class="p">,</span> <span class="s1">&#39;shape&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">shape</span><span class="p">:</span>
+            <span class="n">parallax</span> <span class="o">=</span> <span class="n">where</span><span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">parallax</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">parallax</span><span class="p">)</span>
+            <span class="n">parallax</span><span class="p">[</span><span class="n">parallax</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0e-6</span>
+        <span class="k">elif</span> <span class="n">parallax</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">parallax</span> <span class="o">=</span> <span class="mf">1.0e-6</span>
+
+        <span class="c1"># Convert right ascension, declination, and parallax to position</span>
+        <span class="c1"># vector in equatorial system with units of au.</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">sin</span><span class="p">(</span><span class="n">parallax</span> <span class="o">*</span> <span class="mf">1.0e-3</span> <span class="o">*</span> <span class="n">ASEC2RAD</span><span class="p">)</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">radians</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">radians</span>
+        <span class="n">cra</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">sra</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+        <span class="n">cdc</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+        <span class="n">sdc</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_position_au</span> <span class="o">=</span> <span class="n">array</span><span class="p">((</span>
+            <span class="n">dist</span> <span class="o">*</span> <span class="n">cdc</span> <span class="o">*</span> <span class="n">cra</span><span class="p">,</span>
+            <span class="n">dist</span> <span class="o">*</span> <span class="n">cdc</span> <span class="o">*</span> <span class="n">sra</span><span class="p">,</span>
+            <span class="n">dist</span> <span class="o">*</span> <span class="n">sdc</span><span class="p">,</span>
+            <span class="p">))</span>
+
+        <span class="c1"># Compute Doppler factor, which accounts for change in light</span>
+        <span class="c1"># travel time to star.</span>
+
+        <span class="n">k</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">radial_km_per_s</span> <span class="o">/</span> <span class="n">C</span> <span class="o">*</span> <span class="mf">1000.0</span><span class="p">)</span>
+
+        <span class="c1"># Convert proper motion and radial velocity to orthogonal</span>
+        <span class="c1"># components of motion with units of au/day.</span>
+
+        <span class="n">pmr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ra_mas_per_year</span> <span class="o">/</span> <span class="p">(</span><span class="n">parallax</span> <span class="o">*</span> <span class="mf">365.25</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
+        <span class="n">pmd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dec_mas_per_year</span> <span class="o">/</span> <span class="p">(</span><span class="n">parallax</span> <span class="o">*</span> <span class="mf">365.25</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span>
+        <span class="n">rvl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radial_km_per_s</span> <span class="o">*</span> <span class="n">DAY_S</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">au_km</span> <span class="o">*</span> <span class="n">k</span>
+
+        <span class="c1"># Transform motion vector to equatorial system.</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_velocity_au_per_d</span> <span class="o">=</span> <span class="n">array</span><span class="p">((</span>
+            <span class="o">-</span> <span class="n">pmr</span> <span class="o">*</span> <span class="n">sra</span> <span class="o">-</span> <span class="n">pmd</span> <span class="o">*</span> <span class="n">sdc</span> <span class="o">*</span> <span class="n">cra</span> <span class="o">+</span> <span class="n">rvl</span> <span class="o">*</span> <span class="n">cdc</span> <span class="o">*</span> <span class="n">cra</span><span class="p">,</span>
+              <span class="n">pmr</span> <span class="o">*</span> <span class="n">cra</span> <span class="o">-</span> <span class="n">pmd</span> <span class="o">*</span> <span class="n">sdc</span> <span class="o">*</span> <span class="n">sra</span> <span class="o">+</span> <span class="n">rvl</span> <span class="o">*</span> <span class="n">cdc</span> <span class="o">*</span> <span class="n">sra</span><span class="p">,</span>
+              <span class="n">pmd</span> <span class="o">*</span> <span class="n">cdc</span> <span class="o">+</span> <span class="n">rvl</span> <span class="o">*</span> <span class="n">sdc</span><span class="p">,</span>
+              <span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">_unwrap</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return floats untouched, but ask Series for their NumPy arrays.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2013, CHIME Collaboration.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

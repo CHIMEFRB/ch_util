@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ch_util.plot &mdash; ch_util 20.10.0+44.g2b46683 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"></script>
+        <script src="../_static/katex_autorenderer.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ch_util.rfi" href="ch_util.rfi.html" />
+    <link rel="prev" title="ch_util.ni_utils" href="ch_util.ni_utils.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ch_util
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                20.10.0+44.g2b46683
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../reference.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="ch_util._db_tables.html">ch_util._db_tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.andata.html">ch_util.andata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.cal_utils.html">ch_util.cal_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.chan_monitor.html">ch_util.chan_monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.connectdb.html">ch_util.connectdb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.data_index.html">ch_util.data_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.data_quality.html">ch_util.data_quality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.ephemeris.html">ch_util.ephemeris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.finder.html">ch_util.finder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.fluxcat.html">ch_util.fluxcat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.holography.html">ch_util.holography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.layout.html">ch_util.layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.ni_utils.html">ch_util.ni_utils</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ch_util.plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.rfi.html">ch_util.rfi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.timing.html">ch_util.timing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.tools.html">ch_util.tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ch_util</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../reference.html">API Reference</a> &raquo;</li>
+        
+      <li>ch_util.plot</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_autosummary/ch_util.plot.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-ch_util.plot">
+<span id="ch-util-plot"></span><h1>ch_util.plot<a class="headerlink" href="#module-ch_util.plot" title="Permalink to this headline">¶</a></h1>
+<p>Plotting routines for CHIME data</p>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util.plot.spectra" title="ch_util.plot.spectra"><code class="xref py py-obj docutils literal notranslate"><span class="pre">spectra</span></code></a>(data[, freq_sel, prod_sel, …])</p></td>
+<td><p>Plots spectra at different times and for different correlation products.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util.plot.time_ordered" title="ch_util.plot.time_ordered"><code class="xref py py-obj docutils literal notranslate"><span class="pre">time_ordered</span></code></a>(data[, freq_sel, prod_sel, …])</p></td>
+<td><p>Plots data vs time for different frequencies and corr-pords.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util.plot.waterfall" title="ch_util.plot.waterfall"><code class="xref py py-obj docutils literal notranslate"><span class="pre">waterfall</span></code></a>(data[, freq_sel, prod_sel, …])</p></td>
+<td><p>Two dimensional plot of a visibility vs time and frequency.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="ch_util.plot.spectra">
+<code class="sig-prename descclassname">ch_util.plot.</code><code class="sig-name descname">spectra</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">freq_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prod_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">time_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">part_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/plot.html#spectra"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util.plot.spectra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots spectra at different times and for different correlation products.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util.plot.time_ordered">
+<code class="sig-prename descclassname">ch_util.plot.</code><code class="sig-name descname">time_ordered</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">freq_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prod_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">time_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">part_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/plot.html#time_ordered"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util.plot.time_ordered" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots data vs time for different frequencies and corr-pords.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util.plot.waterfall">
+<code class="sig-prename descclassname">ch_util.plot.</code><code class="sig-name descname">waterfall</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">freq_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">prod_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">time_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">part_sel</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/plot.html#waterfall"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util.plot.waterfall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Two dimensional plot of a visibility vs time and frequency.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (numpy array or <a class="reference internal" href="ch_util.andata.html#ch_util.andata.AnData" title="ch_util.andata.AnData"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnData</span></code></a> object) – Data to plot. If a numpy array, must be 2D or 3D.</p></li>
+<li><p><strong>freq_sel</strong> (<em>valid numpy index</em>) – Selects data to include along the frequency axis.</p></li>
+<li><p><strong>prod_sel</strong> (<em>valid numpy index</em>) – Selects data to include along the correlation product axis.  If <em>data</em>
+is a 2D array, this argument is ignored.</p></li>
+<li><p><strong>time_sel</strong> (<em>valid numpy index</em>) – Selects data to include along the time axis.</p></li>
+<li><p><strong>part_sel</strong> (<em>string</em><em>, </em><em>one of: 'real'</em><em>, </em><em>'imag'</em><em>, </em><em>'mag'</em><em>, </em><em>'phase'</em><em> or </em><em>'complex'</em>) – Selects what part of data to plot. If ‘None’, plot real part.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">waterfall</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">andata</span><span class="o">.</span><span class="n">AnData</span><span class="o">.</span><span class="n">from_acq</span><span class="p">(</span><span class="s2">&quot;...&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">waterfall</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">prod_sel</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">out_file</span><span class="o">=</span><span class="s1">&#39;filename.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To make a plot normalized by a baseline of the median-filtered
+power spectrum averaged over 200 time bins starting at bin 0 with
+a median filter window of 40 bins:
+&gt;&gt;&gt; data = andata.AnData.from_acq(“…”)
+&gt;&gt;&gt; med_filt_arg = [‘new’,200,0,40]
+&gt;&gt;&gt; waterfall(data, prod_sel=21, med_filt=med_filt_arg)</p>
+<p>You can also make it save the calculated baseline to a file,
+by providing the filename:
+&gt;&gt;&gt; data = andata.AnData.from_acq(“…”)
+&gt;&gt;&gt; med_filt_arg = [‘new’,200,0,40,’base_filename.dat’]
+&gt;&gt;&gt; waterfall(data, prod_sel=21, med_filt=med_filt_arg)</p>
+<p>…or to use a previously obtained baseline to normalize data:
+(where bsln is either a numpy array or a list with length equal
+to the frequency axis of the data)
+&gt;&gt;&gt; data = andata.AnData.from_acq(“…”)
+&gt;&gt;&gt; med_filt_arg = [‘old’,bsln]
+&gt;&gt;&gt; waterfall(data, prod_sel=21, med_filt=med_filt_arg)</p>
+<p>To make a full day plot of 01/14/2014,
+rebinned to 4000 time bins:
+&gt;&gt;&gt; data = andata.AnData.from_acq(“…”)
+&gt;&gt;&gt; full_day_arg = [[2014,01,14],4000,’time’]
+&gt;&gt;&gt; waterfall(data, prod_sel=21, full_day=full_day_arg)</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="ch_util.rfi.html" class="btn btn-neutral float-right" title="ch_util.rfi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ch_util.ni_utils.html" class="btn btn-neutral float-left" title="ch_util.ni_utils" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2013, CHIME Collaboration.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

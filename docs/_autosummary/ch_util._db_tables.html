@@ -1,0 +1,2239 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>ch_util._db_tables &mdash; ch_util 20.10.0+44.g2b46683 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/katex-math.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"></script>
+        <script src="../_static/katex_autorenderer.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ch_util.andata" href="ch_util.andata.html" />
+    <link rel="prev" title="API Reference" href="../reference.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> ch_util
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                20.10.0+44.g2b46683
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../reference.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../reference.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ch_util._db_tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.andata.html">ch_util.andata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.cal_utils.html">ch_util.cal_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.chan_monitor.html">ch_util.chan_monitor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.connectdb.html">ch_util.connectdb</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.data_index.html">ch_util.data_index</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.data_quality.html">ch_util.data_quality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.ephemeris.html">ch_util.ephemeris</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.finder.html">ch_util.finder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.fluxcat.html">ch_util.fluxcat</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.holography.html">ch_util.holography</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.layout.html">ch_util.layout</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.ni_utils.html">ch_util.ni_utils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.plot.html">ch_util.plot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.rfi.html">ch_util.rfi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.timing.html">ch_util.timing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ch_util.tools.html">ch_util.tools</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ch_util</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../reference.html">API Reference</a> &raquo;</li>
+        
+      <li>ch_util._db_tables</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/_autosummary/ch_util._db_tables.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-ch_util._db_tables">
+<span id="ch-util-db-tables"></span><h1>ch_util._db_tables<a class="headerlink" href="#module-ch_util._db_tables" title="Permalink to this headline">¶</a></h1>
+<p>Private module for defining the DB tables with the peewee ORM.</p>
+<p>These are imported into the layout and finder modules.</p>
+<p class="rubric">Module Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.EVENT_AT" title="ch_util._db_tables.EVENT_AT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EVENT_AT</span></code></a></p></td>
+<td><p>Return events at the specified time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.EVENT_BEFORE" title="ch_util._db_tables.EVENT_BEFORE"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EVENT_BEFORE</span></code></a></p></td>
+<td><p>Return events before the specified time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.EVENT_AFTER" title="ch_util._db_tables.EVENT_AFTER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EVENT_AFTER</span></code></a></p></td>
+<td><p>Return events after the specified time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.EVENT_ALL" title="ch_util._db_tables.EVENT_ALL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EVENT_ALL</span></code></a></p></td>
+<td><p>Return all events (and ignore any specified time).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.ORDER_ASC" title="ch_util._db_tables.ORDER_ASC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ORDER_ASC</span></code></a></p></td>
+<td><p>Order search results in ascending order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.ORDER_DESC" title="ch_util._db_tables.ORDER_DESC"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ORDER_DESC</span></code></a></p></td>
+<td><p>Order search results in descending order.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Functions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.add_component" title="ch_util._db_tables.add_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_component</span></code></a>(comp[, time, notes, force])</p></td>
+<td><p>Make one or more components available with a common timestamp.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.compare_connexion" title="ch_util._db_tables.compare_connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_connexion</span></code></a>(conn1, conn2)</p></td>
+<td><p>See if two connexions are the same.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.connect_peewee_tables" title="ch_util._db_tables.connect_peewee_tables"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect_peewee_tables</span></code></a>([read_write, reconnect])</p></td>
+<td><p>Initialize the connection to the CHIME data index database.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.make_connexion" title="ch_util._db_tables.make_connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_connexion</span></code></a>(conn[, time, permanent, …])</p></td>
+<td><p>Connect one or more component pairs with a common timestamp.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.remove_component" title="ch_util._db_tables.remove_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">remove_component</span></code></a>(comp[, time, notes, force])</p></td>
+<td><p>End availability of one or more components with a common timestamp.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.set_property" title="ch_util._db_tables.set_property"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_property</span></code></a>(comp, type, value[, time, …])</p></td>
+<td><p>Set a property value for one or more components with a common timestamp.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.set_user" title="ch_util._db_tables.set_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_user</span></code></a>(u)</p></td>
+<td><p>Identify yourself as a user, for record keeping.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.sever_connexion" title="ch_util._db_tables.sever_connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sever_connexion</span></code></a>(conn[, time, notes, force])</p></td>
+<td><p>Sever one or more component pairs with a common timestamp.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A CHIME component.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.component_doc" title="ch_util._db_tables.component_doc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component_doc</span></code></a>(*args, **kwargs)</p></td>
+<td><p>For linking a component to a document in an external repository.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.component_history" title="ch_util._db_tables.component_history"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component_history</span></code></a>(*args, **kwargs)</p></td>
+<td><p>For providing history information on a component.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.component_type" title="ch_util._db_tables.component_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component_type</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A CHIME component type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.component_type_rev" title="ch_util._db_tables.component_type_rev"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component_type_rev</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A CHIME component type revision.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connexion</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A connexion between two components.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.event" title="ch_util._db_tables.event"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event</span></code></a>(*args, **kwargs)</p></td>
+<td><p>An event, or timestamp, for something graphy.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.event_table" title="ch_util._db_tables.event_table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event_table</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Baseclass for all models which are linked to the event class.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.event_type" title="ch_util._db_tables.event_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event_type</span></code></a>(*args, **kwargs)</p></td>
+<td><p>For differentiating event types.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.external_repo" title="ch_util._db_tables.external_repo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">external_repo</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Information on an external repository.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.global_flag" title="ch_util._db_tables.global_flag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">global_flag</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A simple flag index for global flags.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.global_flag_category" title="ch_util._db_tables.global_flag_category"><code class="xref py py-obj docutils literal notranslate"><span class="pre">global_flag_category</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Categories for global flags.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.graph_obj" title="ch_util._db_tables.graph_obj"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graph_obj</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Parent table for any table that has events associated with it.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.predef_subgraph_spec" title="ch_util._db_tables.predef_subgraph_spec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predef_subgraph_spec</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A specification for a subgraph of a full graph.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.predef_subgraph_spec_param" title="ch_util._db_tables.predef_subgraph_spec_param"><code class="xref py py-obj docutils literal notranslate"><span class="pre">predef_subgraph_spec_param</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Parameters for a subgraph specification.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.property" title="ch_util._db_tables.property"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A property associated with a particular component.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.property_component" title="ch_util._db_tables.property_component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property_component</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A list associating property types with components.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.property_type" title="ch_util._db_tables.property_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property_type</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A component property type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.timestamp" title="ch_util._db_tables.timestamp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timestamp</span></code></a>(*args, **kwargs)</p></td>
+<td><p>A timestamp.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.user_permission" title="ch_util._db_tables.user_permission"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_permission</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Specifies users’ permissions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.user_permission_type" title="ch_util._db_tables.user_permission_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_permission_type</span></code></a>(*args, **kwargs)</p></td>
+<td><p>Defines permissions for the DB interface.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Exceptions</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.BadSubgraph" title="ch_util._db_tables.BadSubgraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BadSubgraph</span></code></a></p></td>
+<td><p>Raise when an error in subgraph specification is made.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.ClosestDraw" title="ch_util._db_tables.ClosestDraw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ClosestDraw</span></code></a></p></td>
+<td><p>There is a draw for the shortest path to a given component type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.DoesNotExist" title="ch_util._db_tables.DoesNotExist"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DoesNotExist</span></code></a></p></td>
+<td><p>The event does not exist at the specified time.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.LayoutIntegrity" title="ch_util._db_tables.LayoutIntegrity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LayoutIntegrity</span></code></a></p></td>
+<td><p>Action would harm the layout integrity.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.NoPermission" title="ch_util._db_tables.NoPermission"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoPermission</span></code></a></p></td>
+<td><p>User does not have permission for a task.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.NoSubgraph" title="ch_util._db_tables.NoSubgraph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NoSubgraph</span></code></a></p></td>
+<td><p>Raise when a subgraph specification is missing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.PropertyType" title="ch_util._db_tables.PropertyType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PropertyType</span></code></a></p></td>
+<td><p>Bad property type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#ch_util._db_tables.PropertyUnchanged" title="ch_util._db_tables.PropertyUnchanged"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PropertyUnchanged</span></code></a></p></td>
+<td><p>A property change was requested, but no change is needed.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#ch_util._db_tables.UnknownUser" title="ch_util._db_tables.UnknownUser"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnknownUser</span></code></a></p></td>
+<td><p>The user requested is unknown.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py exception">
+<dt id="ch_util._db_tables.BadSubgraph">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">BadSubgraph</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#BadSubgraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.BadSubgraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>Raise when an error in subgraph specification is made.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="ch_util._db_tables.ClosestDraw">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">ClosestDraw</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#ClosestDraw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.ClosestDraw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>There is a draw for the shortest path to a given component type.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="ch_util._db_tables.DoesNotExist">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">DoesNotExist</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#DoesNotExist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>The event does not exist at the specified time.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="ch_util._db_tables.EVENT_AFTER">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">EVENT_AFTER</code><em class="property"> = 2</em><a class="headerlink" href="#ch_util._db_tables.EVENT_AFTER" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return events after the specified time.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="ch_util._db_tables.EVENT_ALL">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">EVENT_ALL</code><em class="property"> = 3</em><a class="headerlink" href="#ch_util._db_tables.EVENT_ALL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all events (and ignore any specified time).</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="ch_util._db_tables.EVENT_AT">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">EVENT_AT</code><em class="property"> = 0</em><a class="headerlink" href="#ch_util._db_tables.EVENT_AT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return events at the specified time.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="ch_util._db_tables.EVENT_BEFORE">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">EVENT_BEFORE</code><em class="property"> = 1</em><a class="headerlink" href="#ch_util._db_tables.EVENT_BEFORE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return events before the specified time.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="ch_util._db_tables.LayoutIntegrity">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">LayoutIntegrity</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#LayoutIntegrity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.LayoutIntegrity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>Action would harm the layout integrity.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="ch_util._db_tables.NoPermission">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">NoPermission</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#NoPermission"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.NoPermission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>User does not have permission for a task.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="ch_util._db_tables.NoSubgraph">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">NoSubgraph</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#NoSubgraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.NoSubgraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>Raise when a subgraph specification is missing.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="ch_util._db_tables.ORDER_ASC">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">ORDER_ASC</code><em class="property"> = 0</em><a class="headerlink" href="#ch_util._db_tables.ORDER_ASC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Order search results in ascending order.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt id="ch_util._db_tables.ORDER_DESC">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">ORDER_DESC</code><em class="property"> = 1</em><a class="headerlink" href="#ch_util._db_tables.ORDER_DESC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Order search results in descending order.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="ch_util._db_tables.PropertyType">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">PropertyType</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#PropertyType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.PropertyType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>Bad property type.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="ch_util._db_tables.PropertyUnchanged">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">PropertyUnchanged</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#PropertyUnchanged"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.PropertyUnchanged" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>A property change was requested, but no change is needed.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt id="ch_util._db_tables.UnknownUser">
+<em class="property">exception </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">UnknownUser</code><a class="reference internal" href="../_modules/ch_util/_db_tables.html#UnknownUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.UnknownUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.exceptions.CHIMEdbError</span></code></p>
+<p>The user requested is unknown.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util._db_tables.add_component">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">add_component</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 973148)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#add_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.add_component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make one or more components available with a common timestamp.</p>
+<p>If you are adding only one component, this function is equivalent to calling
+<a class="reference internal" href="#ch_util._db_tables.component.add" title="ch_util._db_tables.component.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.add()</span></code></a>. However, multiple calls to <a class="reference internal" href="#ch_util._db_tables.component.add" title="ch_util._db_tables.component.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.add()</span></code></a>
+generate a unique timestamp per call. To assign a single timestamp to many
+additions at once, use this function.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lna_type</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">component_type</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;LNA&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lna_rev</span> <span class="o">=</span> <span class="n">lna_type</span><span class="o">.</span><span class="n">rev</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">component_type_rev</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">component</span><span class="p">(</span><span class="n">sn</span> <span class="o">=</span> <span class="s2">&quot;LNA</span><span class="si">%04d</span><span class="s2">B&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">lna_type</span><span class="p">,</span> <span class="n">rev</span> <span class="o">=</span> <span class="n">lna_rev</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layout</span><span class="o">.</span><span class="n">add_component</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span> <span class="n">notes</span> <span class="o">=</span> <span class="s2">&quot;Adding many at once.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (list of <a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a> objects) – The components to make available.</p></li>
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which to make the components available.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, then add any components that can be added, while doing
+nothing (except making note of such in the logger) for components whose
+addition would violate database integrity. If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>,
+<code class="xref py py-exc docutils literal notranslate"><span class="pre">AlreadyExists</span></code> is raised for any addition that violates database
+integrity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util._db_tables.compare_connexion">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">compare_connexion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conn1</span></em>, <em class="sig-param"><span class="n">conn2</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#compare_connexion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.compare_connexion" title="Permalink to this definition">¶</a></dt>
+<dd><p>See if two connexions are the same.
+Because the <a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-class docutils literal notranslate"><span class="pre">connexion</span></code></a> could store the two components in different
+orders, or have different instances of the same component object, direct
+comparison may fail. This function explicitly compares both possible
+combinations of serial numbers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conn1</strong> (<a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connexion</span></code></a>) – The first connexion object.</p></li>
+<li><p><strong>conn2</strong> (<a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connexion</span></code></a>) – The second connexion object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code> if the connexions are the same, <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code> otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.component">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">component</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ch_util._db_tables.event_table" title="ch_util._db_tables.event_table"><code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.event_table</span></code></a></p>
+<p>A CHIME component.</p>
+<p>To add or remove components, use the <a class="reference internal" href="#ch_util._db_tables.component.add" title="ch_util._db_tables.component.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a> and <a class="reference internal" href="#ch_util._db_tables.component.remove" title="ch_util._db_tables.component.remove"><code class="xref py py-meth docutils literal notranslate"><span class="pre">remove()</span></code></a> methods.
+There are also methods for getting and setting component properties, history
+and documents.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#ch_util._db_tables.component.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID shared with parent table graph_obj.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key, primary key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component.sn">
+<code class="sig-name descname">sn</code><a class="headerlink" href="#ch_util._db_tables.component.sn" title="Permalink to this definition">¶</a></dt>
+<dd><p>The unique serial number of the component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string, unique</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#ch_util._db_tables.component.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component.type_rev">
+<code class="sig-name descname">type_rev</code><a class="headerlink" href="#ch_util._db_tables.component.type_rev" title="Permalink to this definition">¶</a></dt>
+<dd><p>The revision of this component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.component.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.componentDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.add">
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969537)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add this component.</p>
+<p>This triggers the “component available” event.</p>
+<p>To add many components at once, see <a class="reference internal" href="#ch_util._db_tables.add_component" title="ch_util._db_tables.add_component"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_component()</span></code></a>.</p>
+<p class="rubric">Examples</p>
+<p>The following makes a new LNA available:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lna_type</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">component_type</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;LNA&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lna_rev</span> <span class="o">=</span> <span class="n">lna_type</span><span class="o">.</span><span class="n">rev</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">component_type_rev</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;B&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">comp</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">component</span><span class="p">(</span><span class="n">sn</span> <span class="o">=</span> <span class="s2">&quot;LNA0000A&quot;</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="n">lna_type</span><span class="p">,</span> <span class="n">rev</span> <span class="o">=</span> <span class="n">lna_type</span><span class="o">.</span><span class="n">rev</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which the component is to be made available.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>, then raise <code class="xref py py-exc docutils literal notranslate"><span class="pre">AlreadyExists</span></code> if this event creates a
+conflict; otherwise, do not add but ignore on conflict.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.add_doc">
+<code class="sig-name descname">add_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">repo</span></em>, <em class="sig-param"><span class="n">ref</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969540)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.add_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.add_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a document pointer for this component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repo</strong> (<a class="reference internal" href="#ch_util._db_tables.external_repo" title="ch_util._db_tables.external_repo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">external_repo</span></code></a>) – The place where the document is.</p></li>
+<li><p><strong>ref</strong> (<em>string</em>) – A path or similar pointer, relevative to the root of <em>repo</em>.</p></li>
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which the document pointer is to be added.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>history</strong> – The newly-created document pointer object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ch_util._db_tables.component_doc" title="ch_util._db_tables.component_doc"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component_doc</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.add_history">
+<code class="sig-name descname">add_history</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">notes</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969539)</span></em>, <em class="sig-param"><span class="n">timestamp_notes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.add_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.add_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a history item for this component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>notes</strong> (<em>string</em>) – The history note.</p></li>
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which the history is to be added.</p></li>
+<li><p><strong>timestamp_notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>history</strong> – The newly-created component history object.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ch_util._db_tables.component_history" title="ch_util._db_tables.component_history"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component_history</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.get_connexion">
+<code class="sig-name descname">get_connexion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969533)</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">active</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.get_connexion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.get_connexion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get connexions involving this component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (<a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a>) – If this parameter is set, then search for connexions between this
+component and <em>comp</em>.</p></li>
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – Event time.</p></li>
+<li><p><strong>when</strong> (<em>int</em>) – Event when.</p></li>
+<li><p><strong>order</strong> (<em>int</em>) – Event order.</p></li>
+<li><p><strong>active</strong> (<em>bool</em>) – Event active.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">peewee.SelectQuery</span></code> for <a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-class docutils literal notranslate"><span class="pre">connexion</span></code></a> entries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.get_doc">
+<code class="sig-name descname">get_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969536)</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.get_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.get_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get document pointers associated with this component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which the document events should be active.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">peewee.SelectQuery</span></code> for <a class="reference internal" href="#ch_util._db_tables.component_doc" title="ch_util._db_tables.component_doc"><code class="xref py py-class docutils literal notranslate"><span class="pre">component_doc</span></code></a> entries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.get_history">
+<code class="sig-name descname">get_history</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969535)</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">active</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.get_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.get_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get history items associated with this component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – Event time.</p></li>
+<li><p><strong>when</strong> (<em>int</em>) – Event when.</p></li>
+<li><p><strong>order</strong> (<em>int</em>) – Event order.</p></li>
+<li><p><strong>active</strong> (<em>bool</em>) – Event active.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>A <code class="xref py py-obj docutils literal notranslate"><span class="pre">peewee.SelectQuery</span></code> for <code class="xref py py-class docutils literal notranslate"><span class="pre">history</span></code> entries.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.get_property">
+<code class="sig-name descname">get_property</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969541)</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.get_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.get_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a property for this component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference internal" href="#ch_util._db_tables.property_type" title="ch_util._db_tables.property_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property_type</span></code></a>) – The property type to search for.</p></li>
+<li><p><strong>time</strong> (obj:<cite>datetime.datetime</cite>) – The time at which to get the property.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>property</strong> – If no property is set, then <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> is returned.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969538)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove this component.</p>
+<p>This ends the “component available” event.</p>
+<p>To remove many components at once, see <a class="reference internal" href="#ch_util._db_tables.remove_component" title="ch_util._db_tables.remove_component"><code class="xref py py-func docutils literal notranslate"><span class="pre">remove_component()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which the component is to be removed.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>, then raise <a class="reference internal" href="#ch_util._db_tables.DoesNotExist" title="ch_util._db_tables.DoesNotExist"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DoesNotExist</span></code></a> if this event creates a
+conflict; otherwise, do not add but ignore on conflict.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.component.set_property">
+<code class="sig-name descname">set_property</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">type</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 969542)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component.set_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component.set_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a property for this component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> (<a class="reference internal" href="#ch_util._db_tables.property_type" title="ch_util._db_tables.property_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property_type</span></code></a>) – The property type to search for.</p></li>
+<li><p><strong>value</strong> (<em>string</em>) – The value to set.</p></li>
+<li><p><strong>time</strong> (obj:<cite>datetime.datetime</cite>) – The time at which to get the property.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Notes for the timestamp.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>:exc:ValueError:</strong><strong>, </strong><strong>if value does not conform to the property regular</strong> – </p></li>
+<li><p><strong>expression.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.component_doc">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">component_doc</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ch_util._db_tables.event_table" title="ch_util._db_tables.event_table"><code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.event_table</span></code></a></p>
+<p>For linking a component to a document in an external repository.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_doc.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#ch_util._db_tables.component_doc.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID shared with parent table graph_obj.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key, primary key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_doc.comp">
+<code class="sig-name descname">comp</code><a class="headerlink" href="#ch_util._db_tables.component_doc.comp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The component linked to the document.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_doc.repo">
+<code class="sig-name descname">repo</code><a class="headerlink" href="#ch_util._db_tables.component_doc.repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>The repository holding the document.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_doc.ref">
+<code class="sig-name descname">ref</code><a class="headerlink" href="#ch_util._db_tables.component_doc.ref" title="Permalink to this definition">¶</a></dt>
+<dd><p>The location of the document within the repository (e.g., a filename).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_doc.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.component_doc.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.component_docDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.component_history">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">component_history</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ch_util._db_tables.event_table" title="ch_util._db_tables.event_table"><code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.event_table</span></code></a></p>
+<p>For providing history information on a component.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_history.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#ch_util._db_tables.component_history.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID shared with parent table graph_obj.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key, primary key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_history.comp">
+<code class="sig-name descname">comp</code><a class="headerlink" href="#ch_util._db_tables.component_history.comp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The component linked to the history.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_history.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.component_history.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>The history information.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_history.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.component_history.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.component_historyDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.component_type">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">component_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.name_table</span></code></p>
+<p>A CHIME component type.
+Examples of component types are antennas, 60m coaxial cables, and so on.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_type.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.component_type.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_type.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.component_type.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>An (optional) description of the component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_type.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.component_type.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.component_typeDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.component_type_rev">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">component_type_rev</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#component_type_rev"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.component_type_rev" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.name_table</span></code></p>
+<p>A CHIME component type revision.</p>
+<p>Component types can, optionally, have revisions. For example, when an antenna
+design changes, a new revision is introduced.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_type_rev.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#ch_util._db_tables.component_type_rev.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The component type this revision applies to.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_type_rev.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.component_type_rev.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_type_rev.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.component_type_rev.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>An (optional) description of the component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.component_type_rev.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.component_type_rev.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.component_type_revDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util._db_tables.connect_peewee_tables">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">connect_peewee_tables</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">read_write</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">reconnect</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#connect_peewee_tables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.connect_peewee_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize the connection to the CHIME data index database.</p>
+<p>This function uses the current database connector from
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">core</span></code> to establish a connection to the CHIME data
+index. It must be called if you change the connection method after
+importing this module. Or if you wish to connect with both read and write
+privileges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>read_write</strong> (<em>bool</em>) – Whether to connect with read and write privileges.</p></li>
+<li><p><strong>reconnect</strong> (<em>bool</em>) – Force a reconnection.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.connexion">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">connexion</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#connexion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.connexion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ch_util._db_tables.event_table" title="ch_util._db_tables.event_table"><code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.event_table</span></code></a></p>
+<p>A connexion between two components.</p>
+<p>This should always be instatiated using the from_pair() method.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.connexion.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#ch_util._db_tables.connexion.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID shared with parent table graph_obj.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key, primary key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.connexion.comp1">
+<code class="sig-name descname">comp1</code><a class="headerlink" href="#ch_util._db_tables.connexion.comp1" title="Permalink to this definition">¶</a></dt>
+<dd><p>The first component in the connexion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.connexion.comp2">
+<code class="sig-name descname">comp2</code><a class="headerlink" href="#ch_util._db_tables.connexion.comp2" title="Permalink to this definition">¶</a></dt>
+<dd><p>The second component in the connexion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.connexion.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.connexion.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.connexionDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.connexion.from_pair">
+<em class="property">classmethod </em><code class="sig-name descname">from_pair</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp1</span></em>, <em class="sig-param"><span class="n">comp2</span></em>, <em class="sig-param"><span class="n">allow_new</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#connexion.from_pair"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.connexion.from_pair" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a <a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connexion</span></code></a> given a pair of components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp1</strong> (str or <a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a>) – Pass either the serial number or a <a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a> object.</p></li>
+<li><p><strong>comp2</strong> (str or <a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a>) – Pass either the serial number or a <a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a> object.</p></li>
+<li><p><strong>allow_new</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>, then raise <code class="xref py py-exc docutils literal notranslate"><span class="pre">peewee.DoesNotExist</span></code> if the connexion
+does not exist at all in the database.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>connexion</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connexion</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.connexion.is_connected">
+<code class="sig-name descname">is_connected</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 970376)</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#connexion.is_connected"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.connexion.is_connected" title="Permalink to this definition">¶</a></dt>
+<dd><p>See if a connexion exists.</p>
+<p>Connexions whose events have been deactivated are not included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>datetime</em>) – The time at which to check whether the connexion exists.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>connected</strong> – <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code> if there is a connexion, otherwise <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>peewee.DoesNotExist</strong> – Raised if one or both of the components does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.connexion.is_permanent">
+<code class="sig-name descname">is_permanent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 970378)</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#connexion.is_permanent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.connexion.is_permanent" title="Permalink to this definition">¶</a></dt>
+<dd><p>See if a permenant connexion exists.</p>
+<p>Connexions whose events have been deactivated are not included.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>datetime</em>) – The time at which to check whether the connexion exists.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>connected</strong> – <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code> if there is a permanent connexion, otherwise <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>peewee.DoesNotExist</strong> – Raised if one or both of the components does not exist.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.connexion.make">
+<code class="sig-name descname">make</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 970382)</span></em>, <em class="sig-param"><span class="n">permanent</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#connexion.make"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.connexion.make" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a connexion.
+This method begins a connexion event at the specified time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which to begin the connexion event.</p></li>
+<li><p><strong>permanent</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, then make this a permanent connexion.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>, then <code class="xref py py-exc docutils literal notranslate"><span class="pre">AlreadyExists</span></code> will be raised if the connexion
+already exists; otherwise, conflicts will be ignored and nothing will be
+done.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>connexion</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connexion</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.connexion.other_comp">
+<code class="sig-name descname">other_comp</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#connexion.other_comp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.connexion.other_comp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given one component in the connexion, return the other.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>comp</strong> (<a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a>) – The component you know in the connexion.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The other component in the connexion, i.e., the one that isn’t <em>comp</em>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#ch_util._db_tables.DoesNotExist" title="ch_util._db_tables.DoesNotExist"><strong>DoesNotExist</strong></a> – If <em>comp</em> is not part of this connexion, an exception occurs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.connexion.sever">
+<code class="sig-name descname">sever</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 970383)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#connexion.sever"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.connexion.sever" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sever a connexion.
+This method ends a connexion event at the specified time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which to end the connexion event.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>, then <code class="xref py py-exc docutils literal notranslate"><span class="pre">DoesNotExists</span></code> will be raised if the connexion
+does not exist; otherwise, conflicts will be ignored and nothing will be
+done.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.event">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">event</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.base_model</span></code></p>
+<p>An event, or timestamp, for something graphy.</p>
+<p><em>Never</em> manually create, delete or alter events! Doing so can damage the
+integrity of the database.</p>
+<p>To interact with events, use:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ch_util._db_tables.component.add" title="ch_util._db_tables.component.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.add()</span></code></a>, <a class="reference internal" href="#ch_util._db_tables.add_component" title="ch_util._db_tables.add_component"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_component()</span></code></a>, <a class="reference internal" href="#ch_util._db_tables.component.remove" title="ch_util._db_tables.component.remove"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.remove()</span></code></a> and
+<a class="reference internal" href="#ch_util._db_tables.remove_component" title="ch_util._db_tables.remove_component"><code class="xref py py-func docutils literal notranslate"><span class="pre">remove_component()</span></code></a> for starting and ending component</p></li>
+<li><p><a class="reference internal" href="#ch_util._db_tables.connexion.make" title="ch_util._db_tables.connexion.make"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connexion.make()</span></code></a> and <a class="reference internal" href="#ch_util._db_tables.connexion.sever" title="ch_util._db_tables.connexion.sever"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connexion.sever()</span></code></a> for making and severing
+connexions</p></li>
+<li><p><a class="reference internal" href="#ch_util._db_tables.component.set_property" title="ch_util._db_tables.component.set_property"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.set_property()</span></code></a> for starting/ending component properties</p></li>
+<li><p><a class="reference internal" href="#ch_util._db_tables.component.add_history" title="ch_util._db_tables.component.add_history"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.add_history()</span></code></a> and <a class="reference internal" href="#ch_util._db_tables.component.add_doc" title="ch_util._db_tables.component.add_doc"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.add_doc()</span></code></a> for adding
+component history and documents.</p></li>
+<li><p><a class="reference internal" href="#ch_util._db_tables.global_flag.start" title="ch_util._db_tables.global_flag.start"><code class="xref py py-meth docutils literal notranslate"><span class="pre">global_flag.start()</span></code></a>, <a class="reference internal" href="#ch_util._db_tables.global_flag.end" title="ch_util._db_tables.global_flag.end"><code class="xref py py-meth docutils literal notranslate"><span class="pre">global_flag.end()</span></code></a> to set a global flag.</p></li>
+</ul>
+<p>You can safely deactivate an event using <a class="reference internal" href="#ch_util._db_tables.event.deactivate" title="ch_util._db_tables.event.deactivate"><code class="xref py py-meth docutils literal notranslate"><span class="pre">deactivate()</span></code></a>; this method only
+allows deactivation if it will not damage the database integrity.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event.active">
+<code class="sig-name descname">active</code><a class="headerlink" href="#ch_util._db_tables.event.active" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is this event active? (Instead of deleting events, we deactivate them.)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event.replaces">
+<code class="sig-name descname">replaces</code><a class="headerlink" href="#ch_util._db_tables.event.replaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instead of editing events, we replace them, so that we have a history of
+event edits. This key indicates which event (if any) this event replaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event.graph_obj">
+<code class="sig-name descname">graph_obj</code><a class="headerlink" href="#ch_util._db_tables.event.graph_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Which graph object is this event about?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#ch_util._db_tables.event.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>What kind of event is it?</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event.start">
+<code class="sig-name descname">start</code><a class="headerlink" href="#ch_util._db_tables.event.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>The timestamp for the event start.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event.end">
+<code class="sig-name descname">end</code><a class="headerlink" href="#ch_util._db_tables.event.end" title="Permalink to this definition">¶</a></dt>
+<dd><p>The timestamp for the event end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.event.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.eventDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.event.deactivate">
+<code class="sig-name descname">deactivate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event.deactivate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event.deactivate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deactivate an event.</p>
+<p>Events are never deleted; rather, the <a class="reference internal" href="#ch_util._db_tables.event.active" title="ch_util._db_tables.event.active"><code class="xref py py-attr docutils literal notranslate"><span class="pre">active</span></code></a> flag is switched off.
+This method first checks to see whether doing so would break database
+integrity, and only deactivates if it will not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>:exc:LayoutIntegrity</strong> – if deactivating will compromise layout integrity.:</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.event_table">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">event_table</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_table"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.base_model</span></code></p>
+<p>Baseclass for all models which are linked to the event class.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event_table.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.event_table.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.event_tableDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.event_table.event">
+<code class="sig-name descname">event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime.now()</span></em>, <em class="sig-param"><span class="n">type</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">when</span><span class="o">=</span><span class="default_value">EVENT_ALL</span></em>, <em class="sig-param"><span class="n">order</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">active</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_table.event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_table.event" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find events associated with entries in this table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – Event time.</p></li>
+<li><p><strong>type</strong> (<a class="reference internal" href="#ch_util._db_tables.event_type" title="ch_util._db_tables.event_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event_type</span></code></a>) – Only get events of the specified type.</p></li>
+<li><p><strong>when</strong> (<em>int</em>) – Event when.</p></li>
+<li><p><strong>order</strong> (int or <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code>) – Event order.</p></li>
+<li><p><strong>active</strong> (<em>bool</em>) – Event active.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>event</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">peewee.SelectQuery</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.event_type">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">event_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.name_table</span></code></p>
+<p>For differentiating event types.</p>
+<p>The class methods <a class="reference internal" href="#ch_util._db_tables.event_type.comp_avail" title="ch_util._db_tables.event_type.comp_avail"><code class="xref py py-meth docutils literal notranslate"><span class="pre">comp_avail()</span></code></a>, <a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connexion()</span></code></a> and so on return
+event type instances, and internally store the result. Thus, subsequent calls
+do not generate more database queries. This can reduce overhead.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event_type.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.event_type.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the event type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event_type.human_name">
+<code class="sig-name descname">human_name</code><a class="headerlink" href="#ch_util._db_tables.event_type.human_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A proper, English name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event_type.assoc_table">
+<code class="sig-name descname">assoc_table</code><a class="headerlink" href="#ch_util._db_tables.event_type.assoc_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>The (optional) table that this event is about; it should be a child of
+graph_obj.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event_type.no_end">
+<code class="sig-name descname">no_end</code><a class="headerlink" href="#ch_util._db_tables.event_type.no_end" title="Permalink to this definition">¶</a></dt>
+<dd><p>If ‘Y’, then this is an “instantaneous” event, i.e., there will never be
+recorded an end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>enum(‘Y’, ‘N’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event_type.require_notes">
+<code class="sig-name descname">require_notes</code><a class="headerlink" href="#ch_util._db_tables.event_type.require_notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>If ‘Y’, then the notes of the event _must_ be set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>enum(‘Y’, ‘N’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event_type.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.event_type.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any notes about this event type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.event_type.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.event_type.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.event_typeDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.event_type.comp_avail">
+<em class="property">classmethod </em><code class="sig-name descname">comp_avail</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_type.comp_avail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_type.comp_avail" title="Permalink to this definition">¶</a></dt>
+<dd><p>For getting the component available event type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.event_type.comp_doc">
+<em class="property">classmethod </em><code class="sig-name descname">comp_doc</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_type.comp_doc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_type.comp_doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>For getting the component document event type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.event_type.comp_history">
+<em class="property">classmethod </em><code class="sig-name descname">comp_history</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_type.comp_history"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_type.comp_history" title="Permalink to this definition">¶</a></dt>
+<dd><p>For getting the component history event type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.event_type.connexion">
+<em class="property">classmethod </em><code class="sig-name descname">connexion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_type.connexion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_type.connexion" title="Permalink to this definition">¶</a></dt>
+<dd><p>For getting the connexion event type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.event_type.perm_connexion">
+<em class="property">classmethod </em><code class="sig-name descname">perm_connexion</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_type.perm_connexion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_type.perm_connexion" title="Permalink to this definition">¶</a></dt>
+<dd><p>For getting the permanent connexion event type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.event_type.property">
+<em class="property">classmethod </em><code class="sig-name descname">property</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#event_type.property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.event_type.property" title="Permalink to this definition">¶</a></dt>
+<dd><p>For getting the property event type.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.external_repo">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">external_repo</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#external_repo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.external_repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.name_table</span></code></p>
+<p>Information on an external repository.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.external_repo.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.external_repo.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the repository.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.external_repo.root">
+<code class="sig-name descname">root</code><a class="headerlink" href="#ch_util._db_tables.external_repo.root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Its location, e.g., a URL onto which individual paths to files can be
+appended.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.external_repo.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.external_repo.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any notes about this repository.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.external_repo.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.external_repo.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.external_repoDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.global_flag">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">global_flag</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#global_flag"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.global_flag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ch_util._db_tables.event_table" title="ch_util._db_tables.event_table"><code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.event_table</span></code></a></p>
+<p>A simple flag index for global flags.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#ch_util._db_tables.global_flag.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID shared with parent table graph_obj.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key, primary key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag.category">
+<code class="sig-name descname">category</code><a class="headerlink" href="#ch_util._db_tables.global_flag.category" title="Permalink to this definition">¶</a></dt>
+<dd><p>The category of flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag.severity">
+<code class="sig-name descname">severity</code><a class="headerlink" href="#ch_util._db_tables.global_flag.severity" title="Permalink to this definition">¶</a></dt>
+<dd><p>An indication of how the data finder should react to this flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>enum(‘comment’, ‘warning’, ‘severe’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag.inst">
+<code class="sig-name descname">inst</code><a class="headerlink" href="#ch_util._db_tables.global_flag.inst" title="Permalink to this definition">¶</a></dt>
+<dd><p>The acquisition instrument, if any, affected by this flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.global_flag.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A short description of the flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.global_flag.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notes about the global flag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.global_flag.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.global_flagDoesNotExist</span></code></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.global_flag.end">
+<code class="sig-name descname">end</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 968632)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#global_flag.end"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.global_flag.end" title="Permalink to this definition">¶</a></dt>
+<dd><p>End this global flag.</p>
+<p>See <a class="reference internal" href="#ch_util._db_tables.global_flag.start" title="ch_util._db_tables.global_flag.start"><code class="xref py py-meth docutils literal notranslate"><span class="pre">global_flag.start()</span></code></a> for an example.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which the flag is to end.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ch_util._db_tables.global_flag" title="ch_util._db_tables.global_flag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">global_flag</span></code></a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>AlreadyExists</strong> – </p></li>
+<li><p><strong>if it has not been started.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ch_util._db_tables.global_flag.start">
+<code class="sig-name descname">start</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 968629)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#global_flag.start"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.global_flag.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start this global flag.</p>
+<p class="rubric">Examples</p>
+<p>The following starts and ends a new global flag.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cat</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">global_flag_category</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;pass&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flag</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">global_flag</span><span class="p">(</span><span class="n">category</span> <span class="o">=</span> <span class="n">cat</span><span class="p">,</span> <span class="n">severity</span> <span class="o">=</span> <span class="s2">&quot;comment&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;run_pass12_a&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">flag</span><span class="o">.</span><span class="n">end</span><span class="p">(</span><span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which the flag is to start.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>self</strong></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#ch_util._db_tables.global_flag" title="ch_util._db_tables.global_flag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">global_flag</span></code></a></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>AlreadyExists</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.global_flag_category">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">global_flag_category</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#global_flag_category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.global_flag_category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.base_model</span></code></p>
+<p>Categories for global flags.
+Examples of component types are antennas, 60m coaxial cables, and so on.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag_category.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.global_flag_category.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag_category.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.global_flag_category.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>An (optional) description of the category.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.global_flag_category.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.global_flag_category.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.global_flag_categoryDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.graph_obj">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">graph_obj</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#graph_obj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.graph_obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.base_model</span></code></p>
+<p>Parent table for any table that has events associated with it.
+This is a way to make the event table polymorphic. It points to this table,
+which shares (unique) primary keys with child tables (e.g., component). It
+only has one key: ID.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.graph_obj.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#ch_util._db_tables.graph_obj.id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.graph_obj.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.graph_obj.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.graph_objDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util._db_tables.make_connexion">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">make_connexion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conn</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 973153)</span></em>, <em class="sig-param"><span class="n">permanent</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#make_connexion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.make_connexion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Connect one or more component pairs with a common timestamp.</p>
+<p>If you are connecting only one pair, this function is equivalent to calling
+<a class="reference internal" href="#ch_util._db_tables.connexion.make" title="ch_util._db_tables.connexion.make"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connexion.make()</span></code></a>. However, multiple calls to <a class="reference internal" href="#ch_util._db_tables.connexion.make" title="ch_util._db_tables.connexion.make"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connexion.make()</span></code></a>
+generate a unique timestamp per call. To assign a single timestamp to many
+connexions at once, use this function.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span> <span class="n">comp1</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sn</span> <span class="o">=</span> <span class="s2">&quot;LNA</span><span class="si">%04d</span><span class="s2">B&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="gp">... </span> <span class="n">comp2</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sn</span> <span class="o">=</span> <span class="s2">&quot;CXA</span><span class="si">%04d</span><span class="s2">B&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="gp">... </span> <span class="n">conn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">connexion</span><span class="o">.</span><span class="n">from_pair</span><span class="p">(</span><span class="n">comp1</span><span class="p">,</span> <span class="n">comp2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layout</span><span class="o">.</span><span class="n">make_connexion</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">notes</span> <span class="o">=</span> <span class="s2">&quot;Making multiple connexions at once.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (list of <a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connexion</span></code></a> objects) – The connexions to make.</p></li>
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which to end availability.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, then remove any components that can be removed, while doing
+nothing (except making note of such in the logger) for components whose
+removal would violate database integrity. If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>,
+<a class="reference internal" href="#ch_util._db_tables.DoesNotExist" title="ch_util._db_tables.DoesNotExist"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DoesNotExist</span></code></a> is raised for any addition that violates database
+integrity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.predef_subgraph_spec">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">predef_subgraph_spec</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#predef_subgraph_spec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.name_table</span></code></p>
+<p>A specification for a subgraph of a full graph.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of this subgraph specification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec.start_type">
+<code class="sig-name descname">start_type</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec.start_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The starting component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional notes about this specification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.predef_subgraph_specDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.predef_subgraph_spec_param">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">predef_subgraph_spec_param</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#predef_subgraph_spec_param"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.base_model</span></code></p>
+<p>Parameters for a subgraph specification.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec_param.predef_subgraph_spec">
+<code class="sig-name descname">predef_subgraph_spec</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec_param.predef_subgraph_spec" title="Permalink to this definition">¶</a></dt>
+<dd><p>The subgraph which this applies.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec_param.type1">
+<code class="sig-name descname">type1</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec_param.type1" title="Permalink to this definition">¶</a></dt>
+<dd><p>A component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec_param.type2">
+<code class="sig-name descname">type2</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec_param.type2" title="Permalink to this definition">¶</a></dt>
+<dd><p>A component type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec_param.action">
+<code class="sig-name descname">action</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec_param.action" title="Permalink to this definition">¶</a></dt>
+<dd><p>The role of this component type:
+- T: terminate at type1 (type2 is left NULL).
+- H: hide type1 (type2 is left NULL).
+- O: only draw connexions one way between type1 and type2.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>enum(‘T’, ‘H’, ‘O’)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.predef_subgraph_spec_param.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.predef_subgraph_spec_param.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.predef_subgraph_spec_paramDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.property">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">property</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#ch_util._db_tables.event_table" title="ch_util._db_tables.event_table"><code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.event_table</span></code></a></p>
+<p>A property associated with a particular component.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#ch_util._db_tables.property.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID shared with parent table graph_obj.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key, primary key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property.comp">
+<code class="sig-name descname">comp</code><a class="headerlink" href="#ch_util._db_tables.property.comp" title="Permalink to this definition">¶</a></dt>
+<dd><p>The component to which this property belongs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#ch_util._db_tables.property.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The property type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property.value">
+<code class="sig-name descname">value</code><a class="headerlink" href="#ch_util._db_tables.property.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>The actual property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.property.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.propertyDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.property_component">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">property_component</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#property_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.property_component" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.base_model</span></code></p>
+<p>A list associating property types with components.
+A property can be for one or more component types. For example,
+“dist_from_n_end” is only a property of cassettes, but “termination” may be a
+property of LNA’s, FLA’s and so on. This is simply a table for matching
+property types to component types.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property_component.prop_type">
+<code class="sig-name descname">prop_type</code><a class="headerlink" href="#ch_util._db_tables.property_component.prop_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The property type to be mapped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property_component.comp_type">
+<code class="sig-name descname">comp_type</code><a class="headerlink" href="#ch_util._db_tables.property_component.comp_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The component type to be mapped.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property_component.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.property_component.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.property_componentDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.property_type">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">property_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#property_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.property_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.name_table</span></code></p>
+<p>A component property type.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property_type.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.property_type.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the property type (e.g., “attenuation”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property_type.units">
+<code class="sig-name descname">units</code><a class="headerlink" href="#ch_util._db_tables.property_type.units" title="Permalink to this definition">¶</a></dt>
+<dd><p>The (optional) units of the property (e.g., “dB”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property_type.regex">
+<code class="sig-name descname">regex</code><a class="headerlink" href="#ch_util._db_tables.property_type.regex" title="Permalink to this definition">¶</a></dt>
+<dd><p>An (optional) regular expression for controlling allowed property values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property_type.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.property_type.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any (optional) notes further explaining the property.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.property_type.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.property_type.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.property_typeDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util._db_tables.remove_component">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">remove_component</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 973151)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#remove_component"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.remove_component" title="Permalink to this definition">¶</a></dt>
+<dd><p>End availability of one or more components with a common timestamp.</p>
+<p>If you are adding only one component, this function is equivalent to calling
+<a class="reference internal" href="#ch_util._db_tables.component.remove" title="ch_util._db_tables.component.remove"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.remove()</span></code></a>. However, multiple calls to <a class="reference internal" href="#ch_util._db_tables.component.remove" title="ch_util._db_tables.component.remove"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.remove()</span></code></a>
+generate a unique timestamp per call. To assign a single timestamp to many
+additions at once, use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (list of <a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a> objects) – The components to end availability of.</p></li>
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which to end availability.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, then remove any components that can be removed, while doing
+nothing (except making note of such in the logger) for components whose
+removal would violate database integrity. If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>,
+<a class="reference internal" href="#ch_util._db_tables.DoesNotExist" title="ch_util._db_tables.DoesNotExist"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DoesNotExist</span></code></a> is raised for any addition that violates database
+integrity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util._db_tables.set_property">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">set_property</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">comp</span></em>, <em class="sig-param"><span class="n">type</span></em>, <em class="sig-param"><span class="n">value</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 973152)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#set_property"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.set_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a property value for one or more components with a common timestamp.</p>
+<p>Passing <code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code> for the property value erases that property from the
+component.</p>
+<p>If you altering only one component, this function is equivalent to calling
+<a class="reference internal" href="#ch_util._db_tables.component.set_property" title="ch_util._db_tables.component.set_property"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.set_property()</span></code></a>. However, multiple calls to
+<a class="reference internal" href="#ch_util._db_tables.component.set_property" title="ch_util._db_tables.component.set_property"><code class="xref py py-meth docutils literal notranslate"><span class="pre">component.set_property()</span></code></a> generate a unique timestamp per call. To
+assign a single timestamp to many additions at once, use this function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (list of <a class="reference internal" href="#ch_util._db_tables.component" title="ch_util._db_tables.component"><code class="xref py py-obj docutils literal notranslate"><span class="pre">component</span></code></a> objects) – The components to assign the property to.</p></li>
+<li><p><strong>type</strong> (<a class="reference internal" href="#ch_util._db_tables.property_type" title="ch_util._db_tables.property_type"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property_type</span></code></a>) – The property type.</p></li>
+<li><p><strong>value</strong> (<em>str</em>) – The property value to assign.</p></li>
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which to end availability.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>, then complain if altering the property does nothing (e.g.,
+because the property value would be unchanged for a certain component);
+otherwise, ignore such situations and merely issue logging information on
+them.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>:exc:ValueError:</strong><strong>, </strong><strong>if value does not conform to the property type's regular</strong> – </p></li>
+<li><p><strong>expression; :exc:PropertyUnchanged</strong> – if <em>force</em> is <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>: and a:</p></li>
+<li><p><strong>component's property value would remain unaltered.</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util._db_tables.set_user">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">set_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#set_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.set_user" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identify yourself as a user, for record keeping.</p>
+<p>All events recorded in the database are associated with a user, and not all
+users have all permissions. You must call this function before making any
+changes to the database.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>u</strong> (<em>string</em><em> or </em><em>integer</em>) – Your user identifier: the integer id, the username, or the full name.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#ch_util._db_tables.UnknownUser" title="ch_util._db_tables.UnknownUser"><strong>UnknownUser</strong></a> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ch_util._db_tables.sever_connexion">
+<code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">sever_connexion</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">conn</span></em>, <em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">datetime.datetime(2021, 4, 28, 17, 59, 49, 973154)</span></em>, <em class="sig-param"><span class="n">notes</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">force</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#sever_connexion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.sever_connexion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sever one or more component pairs with a common timestamp.</p>
+<p>If you are severing only one pair, this function is equivalent to calling
+<a class="reference internal" href="#ch_util._db_tables.connexion.sever" title="ch_util._db_tables.connexion.sever"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connexion.sever()</span></code></a>. However, multiple calls to <a class="reference internal" href="#ch_util._db_tables.connexion.sever" title="ch_util._db_tables.connexion.sever"><code class="xref py py-meth docutils literal notranslate"><span class="pre">connexion.sever()</span></code></a>
+generate a unique timestamp per call. To assign a single timestamp to many
+connexion severances at once, use this function.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+<span class="gp">... </span> <span class="n">comp1</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sn</span> <span class="o">=</span> <span class="s2">&quot;LNA</span><span class="si">%04d</span><span class="s2">B&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="gp">... </span> <span class="n">comp2</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">component</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sn</span> <span class="o">=</span> <span class="s2">&quot;CXA</span><span class="si">%04d</span><span class="s2">B&quot;</span><span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="p">))</span>
+<span class="gp">... </span> <span class="n">conn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">layout</span><span class="o">.</span><span class="n">connexion</span><span class="o">.</span><span class="n">from_pair</span><span class="p">(</span><span class="n">comp1</span><span class="p">,</span> <span class="n">comp2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">layout</span><span class="o">.</span><span class="n">sever_connexion</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">notes</span> <span class="o">=</span> <span class="s2">&quot;Severing multiple connexions at once.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>comp</strong> (list of <a class="reference internal" href="#ch_util._db_tables.connexion" title="ch_util._db_tables.connexion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connexion</span></code></a> objects) – The connexions to sever.</p></li>
+<li><p><strong>time</strong> (<em>datetime.datetime</em>) – The time at which to end availability.</p></li>
+<li><p><strong>notes</strong> (<em>string</em>) – Any notes for the timestamp.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If <code class="xref py py-obj docutils literal notranslate"><span class="pre">True</span></code>, then sever any connexions that can be severed, while doing
+nothing (except making note of such in the logger) for connexions whose
+severence would violate database integrity. If <code class="xref py py-obj docutils literal notranslate"><span class="pre">False</span></code>,
+<a class="reference internal" href="#ch_util._db_tables.DoesNotExist" title="ch_util._db_tables.DoesNotExist"><code class="xref py py-exc docutils literal notranslate"><span class="pre">DoesNotExist</span></code></a> is raised for any severence that violates database
+integrity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.timestamp">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">timestamp</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#timestamp"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.base_model</span></code></p>
+<p>A timestamp.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.timestamp.time">
+<code class="sig-name descname">time</code><a class="headerlink" href="#ch_util._db_tables.timestamp.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>The timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.timestamp.entry_time">
+<code class="sig-name descname">entry_time</code><a class="headerlink" href="#ch_util._db_tables.timestamp.entry_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>The creation time of the timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.timestamp.user_id">
+<code class="sig-name descname">user_id</code><a class="headerlink" href="#ch_util._db_tables.timestamp.user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>In the actual DB, this is a foreign key to chimewiki.user(user_id), but
+peewee doesn’t support foreign keys to different schemas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.timestamp.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.timestamp.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any (optional) notes about the timestamp.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.timestamp.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.timestamp.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.timestampDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.user_permission">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">user_permission</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#user_permission"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.user_permission" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.base_model</span></code></p>
+<p>Specifies users’ permissions.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.user_permission.user_id">
+<code class="sig-name descname">user_id</code><a class="headerlink" href="#ch_util._db_tables.user_permission.user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>In the actual DB, this is a foreign key to chimewiki.user(user_id), but
+peewee doesn’t support foreign keys to different schemas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.user_permission.type">
+<code class="sig-name descname">type</code><a class="headerlink" href="#ch_util._db_tables.user_permission.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>The permission type to grant to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>foreign key</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.user_permission.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.user_permission.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.user_permissionDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ch_util._db_tables.user_permission_type">
+<em class="property">class </em><code class="sig-prename descclassname">ch_util._db_tables.</code><code class="sig-name descname">user_permission_type</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ch_util/_db_tables.html#user_permission_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ch_util._db_tables.user_permission_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">chimedb.core.orm.name_table</span></code></p>
+<p>Defines permissions for the DB interface.</p>
+<dl class="py attribute">
+<dt id="ch_util._db_tables.user_permission_type.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#ch_util._db_tables.user_permission_type.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The name of the permission.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.user_permission_type.notes">
+<code class="sig-name descname">notes</code><a class="headerlink" href="#ch_util._db_tables.user_permission_type.notes" title="Permalink to this definition">¶</a></dt>
+<dd><p>An (optional) description of the permission.
+peewee doesn’t support foreign keys to different schemas.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ch_util._db_tables.user_permission_type.DoesNotExist">
+<code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#ch_util._db_tables.user_permission_type.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ch_util._db_tables.user_permission_typeDoesNotExist</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="ch_util.andata.html" class="btn btn-neutral float-right" title="ch_util.andata" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../reference.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2013, CHIME Collaboration.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

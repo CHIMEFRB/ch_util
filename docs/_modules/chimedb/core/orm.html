@@ -1,0 +1,622 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>chimedb.core.orm &mdash; ch_util 20.10.0+44.g2b46683 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/katex-math.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"></script>
+        <script src="../../../_static/katex_autorenderer.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> ch_util
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                20.10.0+44.g2b46683
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../reference.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ch_util</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>chimedb.core.orm</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for chimedb.core.orm</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Base classes for the CHIME ORM.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1"># === Start Python 2/3 compatibility</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">unicode_literals</span>
+<span class="kn">from</span> <span class="nn">future.builtins</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa  pylint: disable=W0401, W0614</span>
+<span class="kn">from</span> <span class="nn">future.builtins.disabled</span> <span class="kn">import</span> <span class="o">*</span>  <span class="c1"># noqa  pylint: disable=W0401, W0614</span>
+
+<span class="c1"># === End Python 2/3 compatibility</span>
+
+<span class="kn">import</span> <span class="nn">peewee</span> <span class="k">as</span> <span class="nn">pw</span>
+<span class="kn">import</span> <span class="nn">ujson</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="ne">ConnectionError</span>
+
+<span class="c1"># Logging</span>
+<span class="c1"># =======</span>
+
+<span class="c1"># Set default logging handler to avoid &quot;No handlers could be found for logger</span>
+<span class="c1"># &#39;layout&#39;&quot; warnings.</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># All peewee-generated logs are logged to this namespace.</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;chimedb&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">NullHandler</span><span class="p">())</span>
+
+<span class="c1"># Global variables and constants.</span>
+<span class="c1"># ================================</span>
+
+<span class="n">database_proxy</span> <span class="o">=</span> <span class="n">pw</span><span class="o">.</span><span class="n">Proxy</span><span class="p">()</span>
+
+<span class="c1"># Helper classes for the peewee ORM</span>
+<span class="c1"># =================================</span>
+
+
+<span class="k">class</span> <span class="nc">EnumField</span><span class="p">(</span><span class="n">pw</span><span class="o">.</span><span class="n">Field</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Implements an ENUM field for peewee.</span>
+
+<span class="sd">    Only MySQL and PostgreSQL support `ENUM` types natively in the database. For</span>
+<span class="sd">    Sqlite (and others), the `ENUM` is implemented as an appropriately sized</span>
+<span class="sd">    `VARCHAR` and the validation is done at the Python level.</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        For the *native* ``ENUM`` to work you *must* register it with peewee by</span>
+<span class="sd">        doing something like::</span>
+
+<span class="sd">            db.register_fields({&#39;enum&#39;: &#39;enum&#39;})</span>
+
+<span class="sd">        This will happen automatically if you use chimedb.core.connect() to</span>
+<span class="sd">        create the database connection.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    enum_list : list</span>
+<span class="sd">        A list of the string values for the ENUM.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    native : bool</span>
+<span class="sd">        Attempt to use the native database `ENUM` type. Should be set at the</span>
+<span class="sd">        *class* level. Only supported for MySQL or PostgreSQL, and will throw</span>
+<span class="sd">        SQL syntax errors if used for other databases.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">native</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">field_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">native</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;enum&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;string&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">enum_list</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enum_list</span> <span class="o">=</span> <span class="n">enum_list</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">enum_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">maxlen</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_list</span><span class="p">])</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">EnumField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clone_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Add the extra parameter so the field is cloned properly</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">EnumField</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">clone_base</span><span class="p">(</span><span class="n">enum_list</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">enum_list</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_modifiers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># This routine seems to be for setting the arguments for creating the</span>
+        <span class="c1"># column.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">native</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">maxlen</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">coerce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="c1"># Coerce the db/python value to the correct output. Also perform</span>
+        <span class="c1"># validation for non native ENUMs.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">native</span> <span class="ow">or</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">enum_list</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Value </span><span class="si">%s</span><span class="s2"> not in ENUM(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">))</span>
+
+
+<span class="k">class</span> <span class="nc">JSONDictField</span><span class="p">(</span><span class="n">pw</span><span class="o">.</span><span class="n">TextField</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fake JSON dict field.</span>
+
+<span class="sd">    In theory MySQL has a native JSON field, but peewee does not support it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">field_type</span> <span class="o">=</span> <span class="s2">&quot;LONGTEXT&quot;</span>
+
+    <span class="k">def</span> <span class="nf">db_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serialize the python values for storage in the db.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Python value must be a dict. Received </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">ujson</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">python_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Deserialize the DB string to JSON.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">pyval</span> <span class="o">=</span> <span class="n">ujson</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pyval</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Database value must convert to dict. Got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">pyval</span><span class="p">)</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">pyval</span>
+
+
+<span class="k">class</span> <span class="nc">base_model</span><span class="p">(</span><span class="n">pw</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for all table models.&quot;&quot;&quot;</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="n">database</span> <span class="o">=</span> <span class="n">database_proxy</span>
+
+
+<span class="k">class</span> <span class="nc">name_table</span><span class="p">(</span><span class="n">base_model</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for all models with a &quot;name&quot; field.</span>
+
+<span class="sd">    This class allows for caching of frequent queries: use the :meth:`from_id`</span>
+<span class="sd">    and :meth:`from_name` methods. They will only query the database the first</span>
+<span class="sd">    time that a given row is requested, and then use a cached value.</span>
+
+<span class="sd">    Methods</span>
+<span class="sd">    -------</span>
+<span class="sd">    clear_cache</span>
+<span class="sd">    get_query_cache</span>
+<span class="sd">    get_name</span>
+<span class="sd">    get_id</span>
+<span class="sd">    fill_cache</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Class variable holding the query cache</span>
+    <span class="n">_query_cache</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">clear_cache</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Clear any cached look-ups for this table.&quot;&quot;&quot;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_query_cache</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_query_cache</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">field</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get and cache a row of the table where the value of column `field`</span>
+<span class="sd">        equals `val`.</span>
+
+<span class="sd">        The database is only queried once for a given `field`, `val` pair.</span>
+<span class="sd">        Subsequent calls use the cached value.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        field : string</span>
+<span class="sd">            The name column to match</span>
+<span class="sd">        val : string</span>
+<span class="sd">            The value of the column to match</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        row : :obj:`name_table`</span>
+<span class="sd">            A row of the table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">class_cache</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_query_cache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+        <span class="n">column_cache</span> <span class="o">=</span> <span class="n">class_cache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="n">val</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">column_cache</span><span class="p">:</span>
+            <span class="n">column_cache</span><span class="p">[</span><span class="n">val</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="n">field</span><span class="p">:</span> <span class="n">val</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="n">column_cache</span><span class="p">[</span><span class="n">val</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a row of the table using the &quot;name&quot; column.</span>
+
+<span class="sd">        The DB is only queried once for a given **name**. Subsequent calls use a</span>
+<span class="sd">        cached value.</span>
+
+<span class="sd">        Equivalent to `get_query_cache(&quot;name&quot;, name)`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name : string</span>
+<span class="sd">          The value of the **name** column to look for.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        row : :obj:`name_table`</span>
+<span class="sd">          A row of the table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_query_cache</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_id</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get a row of the table using the ID column.</span>
+
+<span class="sd">        The DB is only queried once for a given **id**. Subsequent calls use a</span>
+<span class="sd">        cached value.</span>
+
+<span class="sd">        Equivalent to `get_query_cache(&quot;id&quot;, id)`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id : integer</span>
+<span class="sd">          The value of the **id** column to look for.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        row : :obj:`name_table`</span>
+<span class="sd">          A row of the table.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_query_cache</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">fill_cache</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Cache the values of the &quot;name&quot; and &quot;id&quot; columns for all rows for this</span>
+<span class="sd">        table.</span>
+
+<span class="sd">        The DB is only queried the first time this is called. If the cache is</span>
+<span class="sd">        already full, this method does nothing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">class_cache</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_query_cache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="s2">&quot;__fill_cache__&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">class_cache</span><span class="p">:</span>
+            <span class="n">name_cache</span> <span class="o">=</span> <span class="n">class_cache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+            <span class="n">id_cache</span> <span class="o">=</span> <span class="n">class_cache</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">())</span>
+
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">select</span><span class="p">():</span>
+                <span class="n">id_cache</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span>
+                <span class="n">name_cache</span><span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">row</span>
+
+            <span class="n">class_cache</span><span class="p">[</span><span class="s2">&quot;__fill_cache__&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="c1"># Initializing connection to database.</span>
+<span class="c1"># ====================================</span>
+
+
+<span class="k">def</span> <span class="nf">connect_database</span><span class="p">(</span><span class="n">read_write</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">reconnect</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Initialize the connection to the CHIME database.</span>
+
+<span class="sd">    If a basic connection to the database has already been established</span>
+<span class="sd">    through a call to `connectdb.connect`, the database connector</span>
+<span class="sd">    already established by that call will be used to connect.</span>
+
+<span class="sd">    Otherwise, `connectdb.connect` will be called by this function to</span>
+<span class="sd">    establish the connection.</span>
+
+<span class="sd">    This function must be called again if you use `connectdb` to change</span>
+<span class="sd">    the connection method after importing this module.</span>
+
+<span class="sd">    A call to this function must be made before using the `chimedb` proxy</span>
+<span class="sd">    object (`chimedb.core.proxy`, AKA `chimedb.core.orm.database_proxy`).</span>
+<span class="sd">    This includes _any_ use of a base_model-derived table class to access</span>
+<span class="sd">    data.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    `read_write` : bool</span>
+<span class="sd">        If True, use a read-write connection to the database, otherwise</span>
+<span class="sd">        a read-only connection will be established.</span>
+<span class="sd">    `reconnect` : bool</span>
+<span class="sd">        Force a reconnection.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    `chimedb.ConnectionError`</span>
+<span class="sd">        If a database connection could not be established.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">connectdb</span>
+
+    <span class="n">connectdb</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">reconnect</span><span class="p">)</span>
+
+    <span class="c1"># Don&#39;t attempt to connect if the DB connection doesn&#39;t exist (due</span>
+    <span class="c1"># to MPI reasons).</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">connectdb</span><span class="o">.</span><span class="n">connect_this_rank</span><span class="p">():</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Retrieve the database connection</span>
+    <span class="n">connector</span> <span class="o">=</span> <span class="n">connectdb</span><span class="o">.</span><span class="n">current_connector</span><span class="p">(</span><span class="n">read_write</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">connector</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ConnectionError</span><span class="p">(</span><span class="s2">&quot;No database connection could be established.&quot;</span><span class="p">)</span>
+
+    <span class="n">pw_database</span> <span class="o">=</span> <span class="n">connector</span><span class="o">.</span><span class="n">get_peewee_database</span><span class="p">()</span>
+
+    <span class="c1"># Set up and register EnumField</span>
+    <span class="k">global</span> <span class="n">EnumField</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pw_database</span><span class="p">,</span> <span class="p">(</span><span class="n">pw</span><span class="o">.</span><span class="n">MySQLDatabase</span><span class="p">,</span> <span class="n">pw</span><span class="o">.</span><span class="n">PostgresqlDatabase</span><span class="p">)):</span>
+        <span class="n">pw_database</span><span class="o">.</span><span class="n">field_types</span><span class="p">[</span><span class="s2">&quot;enum&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;enum&quot;</span>
+        <span class="n">EnumField</span><span class="o">.</span><span class="n">native</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">EnumField</span><span class="o">.</span><span class="n">native</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Initialise the proxy</span>
+    <span class="n">database_proxy</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">pw_database</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">create_tables</span><span class="p">(</span><span class="n">packages</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="nb">list</span><span class="p">(),</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create tables in chimedb.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    packages : list, optional</span>
+<span class="sd">        List of chimedb subpackages to create tables from.</span>
+<span class="sd">    ignore : list, optional</span>
+<span class="sd">        List of tables to skip creating</span>
+<span class="sd">    check : bool, optional</span>
+<span class="sd">        If True, instead of creating tables, just</span>
+<span class="sd">        list tables which would be created</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="kn">import</span> <span class="nn">importlib</span>
+
+    <span class="c1"># Ensure we have a read-write connection</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">check</span><span class="p">:</span>
+        <span class="n">connect_database</span><span class="p">(</span><span class="n">read_write</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Ensure we have a list</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">packages</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">packages</span> <span class="o">=</span> <span class="p">[</span><span class="n">packages</span><span class="p">]</span>
+
+    <span class="c1"># The ignore table could be string class names or else actual classes</span>
+    <span class="n">ignore</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">item</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ignore</span><span class="p">]</span>
+
+    <span class="c1"># Add abstract table classes that should always be ignored.</span>
+    <span class="n">ignore</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;name_table&quot;</span><span class="p">)</span>
+
+    <span class="c1"># If packages was not set, try and get all subpackages of chimedb</span>
+    <span class="k">if</span> <span class="n">packages</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">pkgutil</span>
+        <span class="kn">import</span> <span class="nn">chimedb</span>
+
+        <span class="c1"># These subpackages we never import</span>
+        <span class="n">blacklist</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;chimedb.setup&quot;</span><span class="p">,</span> <span class="s2">&quot;chimedb.core&quot;</span><span class="p">,</span> <span class="s2">&quot;chimedb.config&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Get a list of all subpackages</span>
+        <span class="n">packages</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">info</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s2">&quot;.orm&quot;</span>
+            <span class="k">for</span> <span class="n">info</span> <span class="ow">in</span> <span class="n">pkgutil</span><span class="o">.</span><span class="n">iter_modules</span><span class="p">(</span><span class="n">chimedb</span><span class="o">.</span><span class="n">__path__</span><span class="p">,</span> <span class="n">chimedb</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">info</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">blacklist</span>
+        <span class="p">]</span>
+
+    <span class="c1"># Import all the specified packages to get them to get their subclasses regiseted</span>
+    <span class="k">for</span> <span class="n">pkgname</span> <span class="ow">in</span> <span class="n">packages</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">pkgname</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+    <span class="c1"># Construct the list of tables</span>
+    <span class="k">def</span> <span class="nf">find_tables</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tables</span><span class="p">,</span> <span class="n">ignore</span><span class="p">):</span>
+        <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">():</span>
+
+            <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span> <span class="ow">in</span> <span class="n">ignore</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">tables</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+
+            <span class="c1"># Look for subclasses recursively</span>
+            <span class="n">find_tables</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tables</span><span class="p">,</span> <span class="n">ignore</span><span class="p">)</span>
+
+    <span class="n">tables</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">find_tables</span><span class="p">(</span><span class="n">base_model</span><span class="p">,</span> <span class="n">tables</span><span class="p">,</span> <span class="n">ignore</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
+        <span class="n">tables_by_module</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+            <span class="n">modlist</span> <span class="o">=</span> <span class="n">tables_by_module</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span> <span class="nb">list</span><span class="p">())</span>
+            <span class="n">modlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Would create:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">mod</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tables_by_module</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;    from </span><span class="si">{0}</span><span class="s2">:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mod</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">tables_by_module</span><span class="p">[</span><span class="n">mod</span><span class="p">]):</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;        &quot;</span> <span class="o">+</span> <span class="n">table</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;Creating tables: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">table</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">])</span>
+        <span class="p">)</span>
+        <span class="n">database_proxy</span><span class="o">.</span><span class="n">create_tables</span><span class="p">(</span><span class="n">tables</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2013, CHIME Collaboration.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
