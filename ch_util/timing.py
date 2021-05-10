@@ -103,55 +103,6 @@ class TimingCorrection(andata.BaseData):
     """Container that holds a timing correction.
 
     Provides methods for applying that correction to other datasets.
-
-    Attributes
-    ----------
-    freq
-    time
-    ntime
-    noise_source
-    nsource
-    input
-    tau
-    weight_tau
-    static_phi
-    weight_static_phi
-    static_phi_fit
-    alpha
-    weight_alpha
-    static_amp
-    weight_static_amp
-    num_freq
-    has_num_freq
-    coeff_tau
-    has_coeff_tau
-    coeff_alpha
-    has_coeff_alpha
-    amp_to_delay
-    has_amplitude
-    reference_noise_source
-    zero_delay_noise_source
-
-    Class Methods
-    -------------
-    from_acq_h5
-    from_dict
-
-    Methods
-    -------
-    set_coeff
-    delete_coeff
-    search_input
-    set_global_reference_time
-    set_reference_time
-    get_tau
-    get_alpha
-    get_stacked_tau
-    get_stacked_alpha
-    get_timing_correction
-    get_gain
-    apply_timing_correction
-    predict_x_error
     """
 
     @classmethod
