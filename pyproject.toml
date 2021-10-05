@@ -20,7 +20,7 @@ caput = {git = "https://github.com/radiocosmology/caput.git"}
 peewee = {version = "^3.14.4", optional = true}
 mpi4py = {version = "^3.0.3", optional = true}
 matplotlib = {version = "^3.4.2", optional = true}
-bitshuffle = {git = "https://github.com/kiyo-masui/bitshuffle.git", optional = true}
+bitshuffle = {git = "https://github.com/kiyo-masui/bitshuffle.git", optional = false} 
 chimedb = {git = "https://github.com/chime-experiment/chimedb.git", optional = true}
 "chimedb.data-index" = {git = "https://github.com/chime-experiment/chimedb_di.git", optional = true}
 #"chimedb.config" = {git = "ssh://git@github.com/chime-experiment/chimedb_config.git", optional = true}
