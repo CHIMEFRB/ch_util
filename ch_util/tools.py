@@ -1175,22 +1175,23 @@ def get_correlator_inputs(lay_time, correlator=None, connect=True, use_backend=F
 
     # Load saved information from pickle file instead.
     usefile = pklfile is not None
-    if usefile and os.path.exists(usefile):
-        return pickle.load(open(pklfile, 'r'))
+    if usefile and os.path.exists(pklfile):
+        return pickle.load(open(pklfile, 'rb'))
 
     # Use frb backend to request inputs.
     if use_backend:
+        assert isinstance(lay_time, datetime.datetime)
         try:
             url = "https://frb.chimenet.ca/maestro/externals/layoutdb/correlator-inputs"
             payload = {
-                "time": date.strftime("%Y-%m-%d %H:%M:%S.%f"),
+                "time": lay_time.strftime("%Y-%m-%d %H:%M:%S.%f"),
                 "correlator": correlator,
             }
             response = requests.get(url, stream=True, json=payload)
             inputlist = pickle.loads(response.raw.data)
             if usefile:
-                with open(pklfile, 'w') as ofile:
-                    pickle.dump(inputs, ofile)
+                with open(pklfile, 'wb') as ofile:
+                    pickle.dump(inputlist, ofile)
             return inputlist
         except requests.exceptions.RequestException as error:
             raise error
