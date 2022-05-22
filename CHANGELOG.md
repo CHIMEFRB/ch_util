@@ -1,3 +1,64 @@
+## v21.0.0 (2022-05-21)
+
+### Fix
+
+- **setup**: moved bitshuffle to chimefrb/bitshuffle fork, updated lock file
+- **finder**: Rename StorageNode.mounted to StorageNode.active (#19)
+- **finder**: Rename StorageNode.mounted to StorageNode.active
+- **holography**: fix multi-user bug with create_from_ant_log
+- **holography**: fix multi-user bug with create_from_ant_log
+- **andata**: typos
+- **layout**: remove broken layout ID support and linter errors
+- **timing**: undefined and unraised exceptions and missing variable
+- **layout**: remove identical redefinition and fix kw args
+- **holography**: errors found by linter
+- **ephemeris**: missing import
+- **data_quality**: remove incorrect kw argument
+- **subtract_rank1_signal**: wrong argument name
+- **add_global_flags**: return None in the absence of anything better
+- **hkpdata**: convert bytes to unicode in HKPData
+- **cal_utils**: require a positive standard deviation (#38)
+- remove PyEphem references
+- **andata**: workaround for h5py/h5py#1750
+- **cal_utils**: fixes bug in shape of Jacobian for polynomial models (#28)
+- **layout**: Fix component.get_property (#34)
+
+### Feat
+
+- **ephemeris,tools**: refactor ephemeris and tools to use arbitrary caput.observer
+- **tools**: added TONEAntenna objects for GBO outrigger
+- **tools**: Change CHIME position
+- **fluxcat,ephemeris**: add the specfind source catalog
+- **holography**: make quality_flag a bitmask
+
+### Refactor
+
+- set minimum version to Python 3.6
+- **timing**: improved timing correction
+
+Features
+========
+- Capability to provide coeff_tau and coeff_alpha dataset. If provided, the timing correction for a particular sky input is a linear combination of the delay from each noise source input with the coefficients set by these [N_input, N_noise_source] arrays. If NOT provided, then the default behaviour is to use the map_input_to_noise_source method to map each sky input to the delay from a single noise source input (currently uses the noise source input on the same FPGA crate).
+
+- Changes the algorithm used to determine the delay from the noise source data to more closely match what is done in the real-time pipeline. Specifically in regards to how outliers are identified and flagged, and how the spectral ripple in the noise source distribution system is removed.
+
+- Capability to save results of eigen-decomposition to datasets in the timing correction object (useful for debugging).
+
+- Adds weight_tau and weight_alpha datasets that contains the inverse variance on the delay (and amplitude) measurements from the noise source data. These uncertainties are propagated to uncertainties on the gain of the sky inputs.
+
+Bug fixes
+=========
+- Cast inputs to float64 before passing to curve_fit. There is a bug in scipy < 1.3.0 where curve_fit will not optimize properly for mixed float32/float64 inputs (PR #10076 of scipy). This ensures that the dependent variable, independent variable, errors, and initial parameters in fit_poly_to_phase are float64. Previously curve_fit was not actually fitting the static phase versus frequency and was just returning the initial parameter estimates.
+
+- Account for product conjugation when constructing the stacked timing correction. This corrects a bug that would have affected the application of the timing correction to stacked cross-polar data.
+- **ephemeris**: use new functionality from caput
+- **ephemeris**: remove `transit_RA` alias and raise exception if used
+
+### BREAKING CHANGE
+
+- this removes Python 2 support
+- code still calling transit_RA will crash
+
 # [20.10.0](https://github.com/chime-experiment/ch_util/compare/v20.5.0...v20.10.0) (2020-10-21)
 
 
