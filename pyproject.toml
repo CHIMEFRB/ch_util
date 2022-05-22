@@ -16,15 +16,16 @@ python = ">=3.7,<3.10"
 scipy = "^1.6.3"
 numpy = "^1.20.3"
 networkx = "^2.5.1"
-caput = {git = "https://github.com/radiocosmology/caput.git"}
-peewee = {version = "^3.14.4", optional = true}
 mpi4py = {version = "^3.0.3", optional = true}
+peewee = {version = "^3.14.4", optional = true}
 matplotlib = {version = "^3.4.2", optional = true}
-bitshuffle = {git = "https://github.com/kiyo-masui/bitshuffle.git", optional = true}
+caput = {git = "https://github.com/radiocosmology/caput.git"}
+bitshuffle = {git = "https://github.com/chimefrb/bitshuffle.git", optional = true}
 chimedb = {git = "https://github.com/chime-experiment/chimedb.git", optional = true}
 "chimedb.data-index" = {git = "https://github.com/chime-experiment/chimedb_di.git", optional = true}
 #"chimedb.config" = {git = "ssh://git@github.com/chime-experiment/chimedb_config.git", optional = true}
 "chimedb.dataflag" = {git = "https://github.com/chime-experiment/chimedb_dataflag.git", optional = true}
+
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
@@ -33,6 +34,12 @@ pytest = "^6.2.4"
 database = ["peewee", "chimedb", "chimedb.data-index", "chimedb.dataflag"]
 data = ["bitshuffle", "matplotlib"]
 mpi = ["mpi4py"]
+
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "20.10.0"
+tag_format = "v$version"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
